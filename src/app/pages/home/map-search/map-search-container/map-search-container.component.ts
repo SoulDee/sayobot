@@ -67,13 +67,13 @@ export class MapSearchContainerComponent implements OnInit {
 
     search(keyWords: any) {
         this.keywords = keyWords
-            .replace(/["]/gi, '')
-            .replace(/(^\s*)|(\s*$)/gi, '');
+            .replace(/"/g, '')
+            .trim();
         this.typeCode = 4;
         this.offset = 0;
 
         // 是否数字，是的话直接请求单个铺面，否的话请求列表
-        if (this.keywords.match(/[\d]/gi)) {
+        if (this.keywords.match(/^\d+$|\/\d+/)) {
             this.mapServe
                 .getMapInfo(this.keywords)
                 .subscribe((res: MapSidDetail) => {
