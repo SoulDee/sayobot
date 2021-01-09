@@ -16,7 +16,7 @@ export class MapService {
 
     constructor(private http: HttpClient) {}
 
-    getMapInfo(sid: number): Observable<MapSidDetail> {
+    getMapInfo(sid: number | string): Observable<MapSidDetail> {
         const params = new HttpParams({ fromString: `0=${sid}` });
         return this.http
             .get(`${this.BASE_URL}/v2/beatmapinfo`, {
