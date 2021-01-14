@@ -7,8 +7,9 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
 } from '@angular/core';
-import { OPTIONS_META, Options, Option } from './options';
+import { OPTIONS_META } from '@core/config';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { Options, Option } from './options';
 
 // TODO 国际化
 // TODO 考虑在设置页面中添加选项的不同模式，select 下拉框，list 列表
