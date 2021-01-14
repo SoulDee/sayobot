@@ -1,28 +1,36 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SearchAdvanceOptionsComponent } from '../../components';
 
 type KeyWords = number | string;
 
 @Component({
     selector: 'map-search-box',
     templateUrl: './map-search-box.component.html',
-    styleUrls: ['./map-search-box.component.scss']
+    styleUrls: ['./map-search-box.component.scss'],
 })
-export class MapSearchBoxComponent implements OnInit {
+export class MapSearchBoxComponent {
     @Input() keyWords: KeyWords;
-
     @Output() search = new EventEmitter<KeyWords>();
+    @Output() optChange = new EventEmitter<Object>();
 
-    @Output() toggleOptionsPanel = new EventEmitter<void>();
-
-    constructor() {}
-
-    ngOnInit() {}
+    constructor(private _dialog: MatDialog) {}
 
     onSearch(keyWords: KeyWords) {
         this.search.emit(keyWords);
     }
 
-    togglePanel() {
-        this.toggleOptionsPanel.emit();
+    openAdvanceOptions() {
+        this._dialog
+            .open(SearchAdvanceOptionsComponent)
+            .afterClosed()
+            .subscribe((res: { opts: number[] }) => {
+                if (res) {
+                    const result = Object.keys(res.opts).map(
+                        (key) => `${key}=${res.opts[key]}`
+                    );
+                    this.optChange.emit(result);
+                }
+            });
     }
 }

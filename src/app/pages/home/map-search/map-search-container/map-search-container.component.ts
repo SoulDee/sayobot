@@ -23,8 +23,6 @@ export class MapSearchContainerComponent implements OnInit {
 
     loading: boolean = false;
 
-    isShowPanel: boolean = true;
-
     constructor(
         public mapServe: MapService,
         public snackBar: MatSnackBar,
@@ -44,6 +42,7 @@ export class MapSearchContainerComponent implements OnInit {
 
     onOptionsChange(results: string[]) {
         this.searchOptions = results;
+        this.search(this.keywords);
     }
 
     onQuickSearch(keyWords: string) {
@@ -66,9 +65,7 @@ export class MapSearchContainerComponent implements OnInit {
     }
 
     search(keyWords: any) {
-        this.keywords = keyWords
-            .replace(/"/g, '')
-            .trim();
+        this.keywords = keyWords.replace(/"/g, '').trim();
         this.typeCode = 4;
         this.offset = 0;
 
@@ -110,10 +107,6 @@ export class MapSearchContainerComponent implements OnInit {
             this.offset = res.endid;
             this.loading = false;
         });
-    }
-
-    onTogglePanel() {
-        this.isShowPanel = !this.isShowPanel;
     }
 
     onPagechange(type: string) {

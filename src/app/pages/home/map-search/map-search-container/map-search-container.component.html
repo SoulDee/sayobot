@@ -2,16 +2,10 @@
     <ng-content></ng-content>
     <map-search-box
         (search)="search($event)"
-        (toggleOptionsPanel)="onTogglePanel()"
+        (optChange)="onOptionsChange($event)"
     ></map-search-box>
     <map-search-quickbar (quickSearch)="onQuickSearch($event)">
     </map-search-quickbar>
-    <map-search-options
-        [isShow]="isShowPanel"
-        (change)="onOptionsChange($event)"
-    >
-    </map-search-options>
-
     <app-loading [loading]="loading"></app-loading>
     <map-search-results *ngIf="!loading" [maps]="results"></map-search-results>
 

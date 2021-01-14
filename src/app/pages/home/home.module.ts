@@ -6,9 +6,24 @@ import { MapSearchModule } from './map-search/map-search.module';
 import { DonationCardComponent } from './donation-card/donation-card.component';
 import { AdsBoxComponent } from './ads-box/ads-box.component';
 import { MapDetailModule } from './map-detail/map-detail.module';
+import {
+    SearchAdvanceOptionsComponent,
+    CategoryOptionsComponent,
+} from './components';
 
 @NgModule({
-    declarations: [HomeComponent, DonationCardComponent, AdsBoxComponent],
-    imports: [SharedModule, HomeRoutingModule, MapSearchModule, MapDetailModule]
+    declarations: [
+        HomeComponent,
+        DonationCardComponent,
+        AdsBoxComponent,
+        SearchAdvanceOptionsComponent,
+        CategoryOptionsComponent,
+    ],
+    imports: [
+        SharedModule,
+        HomeRoutingModule,
+        MapSearchModule,
+        MapDetailModule,
+    ],
 })
 export class HomeModule {}

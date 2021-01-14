@@ -40,8 +40,6 @@ export class SupportComponent implements OnInit {
     }
 
     changeCurrentData(data: SupportList2) {
-        console.log(data);
-
         this.currentExpense =
             data.expense_details.length > 0
                 ? Number(

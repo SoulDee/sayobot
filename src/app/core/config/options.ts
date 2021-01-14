@@ -1,7 +1,9 @@
-export const OPTIONS_META: OptConfig = {
-    mode: {
+import { CategoryOptions } from '@app/types';
+
+export const SEARCH_OPTIONS_CATEGORY: CategoryOptions[] = [
+    {
         title: '模式',
-        value: '5',
+        key: 'M',
         options: [
             {
                 title: 'STD',
@@ -21,9 +23,9 @@ export const OPTIONS_META: OptConfig = {
             },
         ],
     },
-    ststus: {
+    {
         title: '状态',
-        value: '6',
+        key: 'C',
         options: [
             {
                 title: 'Ranked & Approved',
@@ -47,9 +49,9 @@ export const OPTIONS_META: OptConfig = {
             },
         ],
     },
-    subType: {
+    {
         title: '范围',
-        value: '4',
+        key: 'S',
         options: [
             {
                 title: '标题',
@@ -77,9 +79,9 @@ export const OPTIONS_META: OptConfig = {
             },
         ],
     },
-    classify: {
+    {
         title: '分类',
-        value: '7',
+        key: 'G',
         options: [
             {
                 title: 'any',
@@ -123,9 +125,9 @@ export const OPTIONS_META: OptConfig = {
             },
         ],
     },
-    language: {
+    {
         title: '语言',
-        value: '8',
+        key: 'E',
         options: [
             {
                 title: 'any',
@@ -177,4 +179,4 @@ export const OPTIONS_META: OptConfig = {
             },
         ],
     },
-};
+];

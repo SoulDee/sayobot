@@ -1,0 +1,14 @@
+<div matDialogTitle>高级选项</div>
+
+<div matDialogContent>
+    <ng-container *ngFor="let categoryOpt of categoryList">
+        <category-options
+            (change)="result[categoryOpt?.key] = $event"
+            [categoryList]="categoryOpt"
+        ></category-options>
+    </ng-container>
+</div>
+
+<div MatDialogActions align="right">
+    <button mat-raised-button color="accent" (click)="search()">搜索</button>
+</div>

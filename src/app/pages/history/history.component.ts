@@ -21,18 +21,11 @@ import { ActivatedRoute } from '@angular/router';
 export class HistoryComponent implements OnInit {
     updateData: UpdateData[];
 
-    constructor(
-        private updated: UpdatedLogService,
-        private route: ActivatedRoute
-    ) {}
+    constructor(private updated: UpdatedLogService) {}
 
     ngOnInit() {
         this.updated.getUpdatedData().subscribe((res: UpdateData[]) => {
             this.updateData = res;
-        });
-
-        this.route.data.subscribe((res) => {
-            console.log(res);
         });
     }
 }
