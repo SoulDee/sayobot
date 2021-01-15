@@ -16,7 +16,7 @@ export class MapSearchContainerComponent implements OnInit {
     keywords: any = '';
 
     results: PreMap[];
-    searchOptions: string[];
+    searchOptions: string[] = [];
 
     offset: number = 0;
     pageSize: number = 20;
@@ -31,6 +31,8 @@ export class MapSearchContainerComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.initOpts();
+
         this.activeRoute.queryParamMap.subscribe((params) => {
             if (params.get('search')) {
                 this.search(params.get('search'));
@@ -131,6 +133,19 @@ export class MapSearchContainerComponent implements OnInit {
                 break;
             default:
                 break;
+        }
+    }
+
+    private initOpts() {
+        const searchOpts = JSON.parse(localStorage.getItem('searchOpts'));
+
+        if (searchOpts) {
+            Object.keys(searchOpts).forEach((key: string) => {
+                const total = (searchOpts[key] as number[]).reduce(
+                    (prev, next) => prev + next
+                );
+                this.searchOptions.push(`${key}=${total}`);
+            });
         }
     }
 }
