@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SEARCH_OPTIONS_KEY } from '@app/core/config';
 import { CategoryOptions } from '@app/types';
 
 @Component({
@@ -91,7 +92,7 @@ export class CategoryOptionsComponent implements OnInit {
     }
 
     private getOpts() {
-        const optsAll = JSON.parse(localStorage.getItem('searchOpts'));
+        const optsAll = JSON.parse(localStorage.getItem(SEARCH_OPTIONS_KEY));
         if (optsAll) {
             return optsAll[this.categoryList.key] || null;
         }
@@ -99,9 +100,10 @@ export class CategoryOptionsComponent implements OnInit {
     }
 
     private saveOpts() {
-        let searchOpts = JSON.parse(localStorage.getItem('searchOpts')) || {};
+        let searchOpts =
+            JSON.parse(localStorage.getItem(SEARCH_OPTIONS_KEY)) || {};
         searchOpts[this.categoryList.key] = [...this.selected];
-        localStorage.setItem('searchOpts', JSON.stringify(searchOpts));
+        localStorage.setItem(SEARCH_OPTIONS_KEY, JSON.stringify(searchOpts));
     }
 
     private handleChange() {

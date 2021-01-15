@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { MapDetailContainerComponent } from '../../map-detail/map-detail-container';
+import { SEARCH_OPTIONS_KEY } from '@app/core/config';
 
 @Component({
     selector: 'map-search-container',
@@ -137,7 +138,7 @@ export class MapSearchContainerComponent implements OnInit {
     }
 
     private initOpts() {
-        const searchOpts = JSON.parse(localStorage.getItem('searchOpts'));
+        const searchOpts = JSON.parse(localStorage.getItem(SEARCH_OPTIONS_KEY));
 
         if (searchOpts) {
             Object.keys(searchOpts).forEach((key: string) => {
