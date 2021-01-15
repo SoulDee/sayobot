@@ -1,4 +1,3 @@
-export * from './Device/device-opera.service';
 export * from './MapService/map.service';
 export * from './PlayMusicService/play-music.service';
 export * from './ServerMange/server-mange.service';
