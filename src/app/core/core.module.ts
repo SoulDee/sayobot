@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from 'app/shared';
-import { PagesModule } from '@app/pages/pages.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { translateConfig } from '@shared/translate';
 
@@ -39,7 +38,6 @@ const components = [
         HttpClientModule,
         AppRoutingModule,
         SharedModule,
-        PagesModule,
         TranslateModule.forRoot(translateConfig),
     ],
     exports: [SharedModule, AppRoutingModule, ...components],
