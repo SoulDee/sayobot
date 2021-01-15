@@ -13,7 +13,7 @@ import { CategoryOptions } from '@app/types';
                     (change)="masterToggoe($event?.checked)"
                     [checked]="isAllSelected"
                     [indeterminate]="indeterminate"
-                    [disabled]="isOnly || isAllSelected"
+                    [disabled]="isAllSelected"
                     >全部
                 </mat-checkbox>
 
