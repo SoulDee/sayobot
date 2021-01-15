@@ -9,6 +9,7 @@ import { MapDetailModule } from './map-detail/map-detail.module';
 import {
     SearchAdvanceOptionsComponent,
     CategoryOptionsComponent,
+    RangeOptionComponent,
 } from './components';
 
 @NgModule({
@@ -18,6 +19,7 @@ import {
         AdsBoxComponent,
         SearchAdvanceOptionsComponent,
         CategoryOptionsComponent,
+        RangeOptionComponent,
     ],
     imports: [
         SharedModule,

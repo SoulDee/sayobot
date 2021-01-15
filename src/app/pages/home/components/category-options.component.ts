@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SEARCH_OPTIONS_KEY } from '@app/core/config';
+import { SEARCH_CHECKED_KEY } from '@app/core/config';
+import { StorageService } from '@app/core/service/storage.service';
 import { CategoryOptions } from '@app/types';
 
 @Component({
@@ -34,7 +35,7 @@ import { CategoryOptions } from '@app/types';
         `
             .category-container {
                 display: flex;
-                margin-bottom: 2rem;
+                margin-bottom: 1rem;
             }
             .category-title {
                 width: 100px;
@@ -58,15 +59,18 @@ export class CategoryOptionsComponent implements OnInit {
     indeterminate!: boolean;
     isOnly!: boolean;
 
+    constructor(private storage: StorageService) {}
+
     ngOnInit() {
-        const selectedOpt = this.getOpts();
+        const selectedOpt = this.storage.getChild<number[]>(
+            SEARCH_CHECKED_KEY,
+            this.categoryList.key
+        );
 
         if (selectedOpt) {
             this.categoryList.options
-                .filter((opt) => (selectedOpt as number[]).includes(opt.key))
-                .forEach((opt) => {
-                    this.selected.add(opt.key);
-                });
+                .filter((opt) => selectedOpt.includes(opt.key))
+                .forEach((opt) => this.selected.add(opt.key));
         } else {
             this.selectAll();
         }
@@ -91,23 +95,10 @@ export class CategoryOptionsComponent implements OnInit {
         this.updateCheckStatus();
     }
 
-    private getOpts() {
-        const optsAll = JSON.parse(localStorage.getItem(SEARCH_OPTIONS_KEY));
-        if (optsAll) {
-            return optsAll[this.categoryList.key] || null;
-        }
-        return null;
-    }
-
-    private saveOpts() {
-        let searchOpts =
-            JSON.parse(localStorage.getItem(SEARCH_OPTIONS_KEY)) || {};
-        searchOpts[this.categoryList.key] = [...this.selected];
-        localStorage.setItem(SEARCH_OPTIONS_KEY, JSON.stringify(searchOpts));
-    }
-
     private handleChange() {
-        this.saveOpts();
+        this.storage.saveChild(SEARCH_CHECKED_KEY, this.categoryList.key, [
+            ...this.selected,
+        ]);
         const total = [...this.selected].reduce((prev, next) => prev + next);
         this.change.emit(total);
     }
