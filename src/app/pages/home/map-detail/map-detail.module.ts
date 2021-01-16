@@ -5,6 +5,7 @@ import { MapDetailTagsComponent } from './map-detail-tags/map-detail-tags.compon
 import { MapDetailLevelComponent } from './map-detail-level/map-detail-level.component';
 import { MapDetailInfoComponent } from './map-detail-info/map-detail-info.component';
 import { MapDetailChartsComponent } from './map-detail-charts/map-detail-charts.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,10 @@ import { MapDetailChartsComponent } from './map-detail-charts/map-detail-charts.
         MapDetailInfoComponent,
         MapDetailChartsComponent,
     ],
-    imports: [SharedModule],
+    imports: [
+        SharedModule,
+        NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
+    ],
     exports: [MapDetailContainerComponent],
 })
 export class MapDetailModule {}

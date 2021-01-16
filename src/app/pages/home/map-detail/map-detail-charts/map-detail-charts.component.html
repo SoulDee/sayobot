@@ -1,6 +1,10 @@
 <div class="map-detail-echart">
     <div>
-        <div id="map-detail-radar-echart"></div>
+        <div
+            echarts
+            [options]="radarOptions"
+            class="map-detail-radar-echart"
+        ></div>
         <div class="progress-wrapper">
             <mat-progress-bar mode="determinate" [value]="rangeValue">
             </mat-progress-bar>
@@ -11,5 +15,9 @@
         </div>
     </div>
 
-    <div id="map-detail-curve-echart"></div>
+    <div
+        echarts
+        [options]="currveOptions"
+        class="map-detail-curve-echart"
+    ></div>
 </div>

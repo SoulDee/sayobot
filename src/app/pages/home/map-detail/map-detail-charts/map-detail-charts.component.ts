@@ -1,8 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { radar_option, curve_option } from './models';
-import { init } from 'echarts/lib/echarts';
-import 'echarts/lib/chart/line';
-import 'echarts/lib/chart/radar';
 
 // TODO 去除 echarts 的动画
 // TODO 拆分成两个表单，通过ng-content插入
@@ -19,26 +16,18 @@ export class MapDetailChartsComponent implements OnInit {
     star: number;
     rangeValue: number;
 
+    radarOptions: any;
+    currveOptions: any;
+
     @Input()
     set mapData(detail) {
         this._mapData = detail;
-        if (this.radarEchart && this.curveEchart) {
-            this.update();
-        }
+        this.update();
     }
-
-    radarEchart: any;
-    curveEchart: any;
 
     constructor() {}
 
     ngOnInit() {
-        this.radarEchart = init(
-            document.getElementById('map-detail-radar-echart') as HTMLDivElement
-        );
-        this.curveEchart = init(
-            document.getElementById('map-detail-curve-echart') as HTMLDivElement
-        );
         this.update();
     }
 
@@ -59,7 +48,7 @@ export class MapDetailChartsComponent implements OnInit {
         const mapdata = this._mapData;
         const data = [mapdata.AR, mapdata.CS, mapdata.HP, mapdata.OD];
         radar_option.series[0].data[0].value = data;
-        this.radarEchart.setOption(radar_option);
+        this.radarOptions = { ...radar_option };
     }
 
     updateCurveOptionData() {
@@ -70,6 +59,6 @@ export class MapDetailChartsComponent implements OnInit {
             (count, index) => Number(count) + Number(speed[index])
         );
         curve_option.series[0].data = total;
-        this.curveEchart.setOption(curve_option);
+        this.currveOptions = { ...curve_option };
     }
 }

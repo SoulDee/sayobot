@@ -3,12 +3,12 @@
     justify-content: space-around;
 }
 
-#map-detail-radar-echart {
+.map-detail-radar-echart {
     height: 300px;
     width: 400px;
 }
 
-#map-detail-curve-echart {
+.map-detail-curve-echart {
     height: 300px;
     width: 600px;
 }
@@ -19,11 +19,11 @@
 }
 
 @media (max-width: 900px) {
-    #map-detail-radar-echart,
+    .map-detail-radar-echart,
     .progress-wrapper {
         display: none;
     }
-    #map-detail-curve-echart {
+    .map-detail-curve-echart {
         height: 300px;
         width: 100%;
     }

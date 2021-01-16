@@ -24,6 +24,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "echarts": "^5.0.1",
     "ngx-echarts": "^6.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.5.5",
     "swiper": "^5.3.8",
     "tslib": "^2.0.0",
