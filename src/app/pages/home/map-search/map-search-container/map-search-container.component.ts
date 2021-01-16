@@ -84,8 +84,8 @@ export class MapSearchContainerComponent implements OnInit {
             );
     }
 
-    quickSearch(type: SearchType) {
-        this.searchType = type;
+    quickSearch(type: string) {
+        this.searchType = type as SearchType;
         this.offsetStack = [0];
         this.keyword = '';
         this.getMapList();

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --buildOptimizer --optimization --vendorChunk",
+    "build": "ng build --prod",
     "prettier": "prettier --write src/**/*",
     "bundle-report": "ng build --prod --stats-json && webpack-bundle-analyzer dist/sayobot/stats-es2015.json"
   },
