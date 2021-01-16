@@ -24,7 +24,7 @@
         "des": "点击右上角的支持来捐助小夜",
         "updateTime": "最后更新时间"
     },
-    "searchCont": {
+    "searchCtx": {
         "placeholder": "在这里输入什么吧",
         "quick": {
             "title": "快捷搜索",
@@ -43,10 +43,53 @@
             "download": "下载到本地"
         },
         "opts": {
-
+            "mode": "模式",
+            "class": "状态",
+            "subtype": "范围",
+            "genre": "分类",
+            "lang": "语言",
+            "std": "STD",
+            "taiko": "Taiko",
+            "ctb":"CTD",
+            "mania": "Maniz",
+            "rank" : "Ranked & Approved",
+            "qualified": "Qualified",
+            "loved":"Loved",
+            "pending":"Pending & WIP",
+            "graveyard":"Graveyard",
+            "title":"标题",
+            "artist": "艺术家",
+            "creator":"作图者",
+            "difficulty":"难度",
+            "tag": "标签",
+            "source": "提供方",
+            "any": "any",
+            "unknow": "尚未指定",
+            "game": "电子游戏",
+            "animation": "动漫",
+            "rockAndRoll" :"摇滚",
+            "pop":"流行乐",
+            "other": "其他",
+            "novel": "新奇",
+            "hipHop": "嘻哈",
+            "electron": "电子",
+            "english": "English",
+            "japanese": "Japanese",
+            "chinese": "中文",
+            "instrumental": "器乐",
+            "korean": "韩语",
+            "french": "法语",
+            "german": "德语",
+            "swedish": "瑞典语",
+            "spanish": "西班牙语",
+            "italian": "意大利语"
         }
     },
     "mapDetail": {
+        "info": {
+            "creator": "创作者",
+            "artist": "艺术家"
+        },
         "action": {
             "preListen": "试听",
             "preview": "预览铺面",

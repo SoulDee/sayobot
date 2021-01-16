@@ -47,179 +47,179 @@ export const SEARCH_RANGE_OPTIONS: RangeSlider[] = [
 
 export const SEARCH_OPTIONS_CATEGORY: CategoryOptions[] = [
     {
-        title: '模式',
+        title: 'searchCtx.opts.mode',
         key: 'mode',
         options: [
             {
-                title: 'STD',
+                title: 'searchCtx.opts.std',
                 key: 1,
             },
             {
-                title: 'Taiko',
+                title: 'searchCtx.opts.taiko',
                 key: 2,
             },
             {
-                title: 'CTB',
+                title: 'searchCtx.opts.ctb',
                 key: 4,
             },
             {
-                title: 'Mania',
+                title: 'searchCtx.opts.mania',
                 key: 8,
             },
         ],
     },
     {
-        title: '状态',
+        title: 'searchCtx.opts.class',
         key: 'class',
         options: [
             {
-                title: 'Ranked & Approved',
+                title: 'searchCtx.opts.rank',
                 key: 1,
             },
             {
-                title: 'Qualified',
+                title: 'searchCtx.opts.qualified',
                 key: 2,
             },
             {
-                title: 'Loved',
+                title: 'searchCtx.opts.loved',
                 key: 4,
             },
             {
-                title: 'Pending & WIP',
+                title: 'searchCtx.opts.pending',
                 key: 8,
             },
             {
-                title: 'Graveyard',
+                title: 'searchCtx.opts.graveyard',
                 key: 16,
             },
         ],
     },
     {
-        title: '范围',
+        title: 'searchCtx.opts.subtype',
         key: 'subtype',
         options: [
             {
-                title: '标题',
+                title: 'searchCtx.opts.title',
                 key: 1,
             },
             {
-                title: '艺术家',
+                title: 'searchCtx.opts.artist',
                 key: 2,
             },
             {
-                title: '作图者',
+                title: 'searchCtx.opts.creator',
                 key: 4,
             },
             {
-                title: '难度',
+                title: 'searchCtx.opts.difficulty',
                 key: 8,
             },
             {
-                title: '标签',
+                title: 'searchCtx.opts.tag',
                 key: 16,
             },
             {
-                title: '提供方',
+                title: 'searchCtx.opts.source',
                 key: 32,
             },
         ],
     },
     {
-        title: '分类',
+        title: 'searchCtx.opts.genre',
         key: 'genre',
         options: [
             {
-                title: 'any',
+                title: 'searchCtx.opts.any',
                 key: 1,
             },
             {
-                title: '尚未指定',
+                title: 'searchCtx.opts.unknow',
                 key: 2,
             },
             {
-                title: '电子游戏',
+                title: 'searchCtx.opts.game',
                 key: 4,
             },
             {
-                title: '动漫',
+                title: 'searchCtx.opts.animation',
                 key: 8,
             },
             {
-                title: '摇滚',
+                title: 'searchCtx.opts.rockAndRoll',
                 key: 16,
             },
             {
-                title: '流行乐',
+                title: 'searchCtx.opts.pop',
                 key: 32,
             },
             {
-                title: '其他',
+                title: 'searchCtx.opts.other',
                 key: 64,
             },
             {
-                title: '新奇',
+                title: 'searchCtx.opts.novel',
                 key: 128,
             },
             {
-                title: '嘻哈',
+                title: 'searchCtx.opts.hipHop',
                 key: 256,
             },
             {
-                title: '电子',
+                title: 'searchCtx.opts.electron',
                 key: 1024,
             },
         ],
     },
     {
-        title: '语言',
+        title: 'searchCtx.opts.lang',
         key: 'language',
         options: [
             {
-                title: 'any',
+                title: 'searchCtx.opts.any',
                 key: 1,
             },
             {
-                title: '其他',
+                title: 'searchCtx.opts.other',
                 key: 2,
             },
             {
-                title: '英语',
+                title: 'searchCtx.opts.english',
                 key: 4,
             },
             {
-                title: '日语',
+                title: 'searchCtx.opts.japanese',
                 key: 8,
             },
             {
-                title: '中文',
+                title: 'searchCtx.opts.chinese',
                 key: 16,
             },
             {
-                title: '器乐',
+                title: 'searchCtx.opts.instrumental',
                 key: 32,
             },
             {
-                title: '韩语',
+                title: 'searchCtx.opts.korean',
                 key: 64,
             },
             {
-                title: '法语',
+                title: 'searchCtx.opts.french',
                 key: 128,
             },
             {
-                title: '德语',
+                title: 'searchCtx.opts.german',
                 key: 256,
             },
             {
-                title: '瑞典语',
+                title: 'searchCtx.opts.swedish',
                 key: 512,
             },
             {
-                title: '西班牙语',
+                title: 'searchCtx.opts.spanish',
                 key: 1024,
             },
             {
-                title: '意大利语',
+                title: 'searchCtx.opts.italian',
                 key: 2048,
             },
         ],

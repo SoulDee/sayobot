@@ -1,13 +1,13 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { language } from 'assets/i18n/language';
+import { language } from '@app/core/config';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+    styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     language: Array<any>;
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.dialog.open(HelpDialogComponent, {
             maxHeight: '98vh',
             width: '800px',
-            maxWidth: '98vw'
+            maxWidth: '98vw',
         });
     }
 

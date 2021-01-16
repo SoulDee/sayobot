@@ -24,7 +24,7 @@
         "des": "Click support in the upper right corner to donate to sayobot",
         "updateTime": "Last update time"
     },
-    "searchCont": {
+    "searchCtx": {
         "placeholder": "What to enter here...",
         "quick": {
             "title": "Quick search",
@@ -43,10 +43,53 @@
             "download": "Download to local"
         },
         "opts": {
-
+            "mode": "Mode",
+            "class": "Class",
+            "subtype": "Range",
+            "genre": "Genre",
+            "lang": "Language",
+            "std": "STD",
+            "taiko": "Taiko",
+            "ctb":"CTD",
+            "mania": "Maniz",
+            "rank" : "Ranked & Approved",
+            "qualified": "Qualified",
+            "loved":"Loved",
+            "pending":"Pending & WIP",
+            "graveyard":"Graveyard",
+            "title":"Title",
+            "artist": "Artist",
+            "creator":"Creator",
+            "difficulty":"Difficulty",
+            "tag": "Tag",
+            "source": "Source",
+            "any": "Any",
+            "unknow": "Unkonw",
+            "game": "Game",
+            "animation": "Animation",
+            "rockAndRoll" :"Rock and Roll",
+            "pop":"Pop",
+            "other": "Other",
+            "novel": "Novel",
+            "hipHop": "Hip Hop",
+            "electron": "Electron",
+            "english": "English",
+            "japanese": "Japanese",
+            "chinese": "Chinese",
+            "instrumental": "instrumental",
+            "korean": "Korean",
+            "french": "French",
+            "german": "German",
+            "swedish": "Swedish",
+            "spanish": "Spanish",
+            "italian": "Italian"
         }
     },
     "mapDetail": {
+        "info": {
+            "creator": "Creator",
+            "artist": "Artist"
+        },
         "action": {
             "preListen": "Part",
             "preview": "Preview",

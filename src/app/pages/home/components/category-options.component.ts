@@ -8,7 +8,7 @@ import { CategoryOptions } from '@app/types';
     template: `
         <div class="category-container">
             <div class="category-title">
-                {{ categoryList?.title }}
+                {{ categoryList?.title | translate }}
             </div>
             <div class="opts-container">
                 <mat-checkbox
@@ -25,7 +25,7 @@ import { CategoryOptions } from '@app/types';
                         (change)="handleInsChange($event?.checked, ins?.key)"
                         [checked]="selected.has(ins?.key)"
                         [disabled]="isOnly && selected.has(ins?.key)"
-                        >{{ ins?.title }}
+                        >{{ ins?.title | translate }}
                     </mat-checkbox>
                 </ng-container>
             </div>

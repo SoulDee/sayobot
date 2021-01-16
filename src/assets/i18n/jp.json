@@ -24,7 +24,7 @@
         "des": "右上隅にあるサポートをクリックして、sayobotに寄付します",
         "updateTime": "最終更新時間"
     },
-    "searchCont": {
+    "searchCtx": {
         "placeholder": "ここに入力するもの",
         "quick": {
             "title": "クイックサーチ",
@@ -43,10 +43,53 @@
             "download": "ローカルにダウンロード"
         },
         "opts": {
-
+            "mode": "モード",
+            "class": "カテゴリ",
+            "subtype": "範囲",
+            "genre": "ジャンル",
+            "lang": "言語",
+            "std": "STD",
+            "taiko": "Taiko",
+            "ctb":"CTD",
+            "mania": "Maniz",
+            "rank" : "Ranked & Approved",
+            "qualified": "Qualified",
+            "loved":"Loved",
+            "pending":"Pending & WIP",
+            "graveyard":"Graveyard",
+            "title":"タイトル",
+            "artist": "芸術家",
+            "creator":"作成者",
+            "difficulty":"難易度",
+            "tag": "ラベル",
+            "source": "ソース",
+            "any": "任意",
+            "unknow": "知りません",
+            "game": "ビデオゲーム",
+            "animation": "アニメ",
+            "rockAndRoll" :"ロックンロール",
+            "pop":"ポップス",
+            "other": "他の",
+            "novel": "ノニティ",
+            "hipHop": "ヒップホップ",
+            "electron": "電子",
+            "english": "英語",
+            "japanese": "日本語",
+            "chinese": "中国語",
+            "instrumental": "インストゥルメンション",
+            "korean": "韓国語",
+            "french": "フランス語",
+            "german": "ドイツ語",
+            "swedish": "スウェーデン語",
+            "spanish": "スペイン語",
+            "italian": "イタリア語"
         }
     },
     "mapDetail": {
+        "info": {
+            "creator": "作成者",
+            "artist": "芸術家"
+        },
         "action": {
             "preListen": "オーディション",
             "preview": "プレビュー",

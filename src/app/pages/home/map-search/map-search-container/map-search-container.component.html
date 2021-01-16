@@ -5,13 +5,13 @@
         <mat-icon
             class="icon-m icon-options ab-center-y"
             (click)="openAdvanceOptions()"
-            matTooltip="{{ 'searchCont.box.optTip' | translate }}"
+            matTooltip="{{ 'searchCtx.box.optTip' | translate }}"
         >
             menu</mat-icon
         >
         <input
             class="box"
-            placeholder="{{ 'searchCont.placeholder' | translate }}"
+            placeholder="{{ 'searchCtx.placeholder' | translate }}"
             #searchBox
             (keyup.enter)="search(searchBox.value)"
             [(ngModel)]="keyword"
@@ -25,13 +25,13 @@
 
     <ul class="search-bar">
         {{
-            'searchCont.quick.title' | translate
+            'searchCtx.quick.title' | translate
         }}：
         <li class="quick-search" (click)="quickSearch('new')">
-            {{ 'searchCont.quick.new' | translate }}
+            {{ 'searchCtx.quick.new' | translate }}
         </li>
         <li class="quick-search" (click)="quickSearch('hot')">
-            {{ 'searchCont.quick.hot' | translate }}
+            {{ 'searchCtx.quick.hot' | translate }}
         </li>
     </ul>
 

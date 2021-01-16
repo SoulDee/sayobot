@@ -3,13 +3,13 @@
         <img src="{{ imgSrc }}" alt="{{ imgSrc }}" />
         <div
             class="overlay"
-            matTooltip="{{ 'searchCont.panel.lookTip' | translate }}"
+            matTooltip="{{ 'searchCtx.panel.lookTip' | translate }}"
             (click)="openWithDetail()"
         ></div>
         <div class="title one-line">{{ map.title }}</div>
         <div
             class="status"
-            matTooltip="{{ 'searchCont.panel.statusTip' | translate }}"
+            matTooltip="{{ 'searchCtx.panel.statusTip' | translate }}"
         >
             {{ status | uppercase }}
         </div>
@@ -17,14 +17,14 @@
             {{ map.play_count
             }}<mat-icon
                 svgIcon="play-circle"
-                matTooltip="{{ 'searchCont.panel.playcountTip' | translate }}"
+                matTooltip="{{ 'searchCtx.panel.playcountTip' | translate }}"
             ></mat-icon>
         </div>
         <div class="favorite flex-center">
             {{ map.favourite_count
             }}<mat-icon
                 svgIcon="favorite"
-                matTooltip="{{ 'searchCont.panel.favoriteTip' | translate }}"
+                matTooltip="{{ 'searchCtx.panel.favoriteTip' | translate }}"
             ></mat-icon>
         </div>
     </div>
@@ -32,14 +32,18 @@
     <div class="info">
         <div class="creator">
             <div class="label-wrap">
-                <span class="label">Creator</span>
+                <span class="label">{{
+                    'mapDetail.info.creator' | translate
+                }}</span>
                 <span>：</span>
             </div>
             {{ map.creator }}
         </div>
         <div class="artist">
             <div class="label-wrap">
-                <span class="label">Artist</span>
+                <span class="label">{{
+                    'mapDetail.info.artist' | translate
+                }}</span>
                 <span>：</span>
             </div>
             {{ map.artist }}
@@ -54,17 +58,17 @@
         <div class="action">
             <mat-icon
                 (click)="addToMusicQueue()"
-                matTooltip="{{ 'searchCont.panel.add2music' | translate }}"
+                matTooltip="{{ 'searchCtx.panel.add2music' | translate }}"
                 >queue
             </mat-icon>
             <mat-icon
                 (click)="download()"
-                matTooltip="{{ 'searchCont.panel.download' | translate }}"
+                matTooltip="{{ 'searchCtx.panel.download' | translate }}"
                 >cloud_download
             </mat-icon>
             <mat-icon
                 (click)="openWithDetail()"
-                matTooltip="{{ 'searchCont.panel.lookTip' | translate }}"
+                matTooltip="{{ 'searchCtx.panel.lookTip' | translate }}"
                 >open_in_new
             </mat-icon>
         </div>
