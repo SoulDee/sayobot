@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { CategoryOptions } from '@app/types';
-import { SEARCH_OPTIONS_CATEGORY } from '@core/config';
+import { CategoryOptions, RangeSlider } from '@app/types';
+import { SEARCH_OPTIONS_CATEGORY, SEARCH_RANGE_OPTIONS } from '@core/config';
 
 @Component({
     selector: 'app-search-advance-options',
@@ -10,13 +10,13 @@ import { SEARCH_OPTIONS_CATEGORY } from '@core/config';
 })
 export class SearchAdvanceOptionsComponent {
     categoryList: CategoryOptions[] = SEARCH_OPTIONS_CATEGORY;
-    result = {};
+    rangeList: RangeSlider[] = SEARCH_RANGE_OPTIONS;
 
     constructor(
         private _dialogRef: MatDialogRef<SearchAdvanceOptionsComponent>
     ) {}
 
     search() {
-        this._dialogRef.close({ opts: this.result });
+        this._dialogRef.close({ success: true });
     }
 }

@@ -1,9 +1,54 @@
-import { CategoryOptions } from '@app/types';
+import { CategoryOptions, RangeSlider } from '@app/types';
+
+export const SEARCH_RANGE_OPTIONS: RangeSlider[] = [
+    {
+        title: 'Stars',
+        key: 'stars',
+        min: 0,
+        max: 1000,
+    },
+    {
+        title: 'AR',
+        key: 'ar',
+        min: 0,
+        max: 1000,
+    },
+    {
+        title: 'OD',
+        key: 'od',
+        min: 0,
+        max: 1000,
+    },
+    {
+        title: 'CS',
+        key: 'cs',
+        min: 0,
+        max: 1000,
+    },
+    {
+        title: 'HP',
+        key: 'hp',
+        min: 0,
+        max: 1000,
+    },
+    {
+        title: 'Length',
+        key: 'length',
+        min: 0,
+        max: 1000,
+    },
+    {
+        title: 'BPM',
+        key: 'bpm',
+        min: 0,
+        max: 1000,
+    },
+];
 
 export const SEARCH_OPTIONS_CATEGORY: CategoryOptions[] = [
     {
         title: '模式',
-        key: 'M',
+        key: 'mode',
         options: [
             {
                 title: 'STD',
@@ -25,7 +70,7 @@ export const SEARCH_OPTIONS_CATEGORY: CategoryOptions[] = [
     },
     {
         title: '状态',
-        key: 'C',
+        key: 'class',
         options: [
             {
                 title: 'Ranked & Approved',
@@ -51,7 +96,7 @@ export const SEARCH_OPTIONS_CATEGORY: CategoryOptions[] = [
     },
     {
         title: '范围',
-        key: 'S',
+        key: 'subtype',
         options: [
             {
                 title: '标题',
@@ -81,7 +126,7 @@ export const SEARCH_OPTIONS_CATEGORY: CategoryOptions[] = [
     },
     {
         title: '分类',
-        key: 'G',
+        key: 'genre',
         options: [
             {
                 title: 'any',
@@ -127,7 +172,7 @@ export const SEARCH_OPTIONS_CATEGORY: CategoryOptions[] = [
     },
     {
         title: '语言',
-        key: 'E',
+        key: 'language',
         options: [
             {
                 title: 'any',

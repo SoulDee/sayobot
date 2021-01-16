@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from '@app/core/service';
-import { PreMap, SearchMapResult, MapSidDetail } from '@app/shared/models';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { PreMap, MapSidDetail } from '@app/shared/models';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { MapDetailContainerComponent } from '../../map-detail/map-detail-container';
-import { SEARCH_CHECKED_KEY } from '@app/core/config';
+import { SEARCH_CHECKED_KEY, SEARCH_SLIDER_KEY } from '@app/core/config';
+import { SearchType } from '@app/types';
 
 @Component({
     selector: 'map-search-container',
@@ -13,69 +13,39 @@ import { SEARCH_CHECKED_KEY } from '@app/core/config';
     styleUrls: ['./map-search-container.component.scss'],
 })
 export class MapSearchContainerComponent implements OnInit {
-    typeCode: number;
-    keywords: any = '';
+    keyword: string = '';
 
     results: PreMap[];
-    searchOptions: string[] = [];
 
     offset: number = 0;
     pageSize: number = 20;
 
     loading: boolean = false;
 
+    searchType: SearchType = SearchType.Search;
+
     constructor(
-        public mapServe: MapService,
-        public snackBar: MatSnackBar,
-        public dialog: MatDialog,
-        public activeRoute: ActivatedRoute
+        private mapServe: MapService,
+        private dialog: MatDialog,
+        private activeRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
-        this.initOpts();
-
         this.activeRoute.queryParamMap.subscribe((params) => {
             if (params.get('search')) {
                 this.search(params.get('search'));
             }
         });
-
-        this.onQuickSearch('new');
     }
 
-    onOptionsChange(results: string[]) {
-        this.searchOptions = results;
-        this.search(this.keywords);
-    }
-
-    onQuickSearch(keyWords: string) {
-        this.offset = 0;
-
-        switch (keyWords) {
-            case 'new':
-                this.typeCode = 2;
-                break;
-            case 'hot':
-                this.typeCode = 1;
-                break;
-            default:
-                this.typeCode = 4;
-                this.keywords = keyWords;
-                break;
-        }
-
-        this.onSearch();
-    }
-
-    search(keyWords: any) {
-        this.keywords = keyWords.replace(/"/g, '').trim();
-        this.typeCode = 4;
+    search(keyword: any) {
+        this.keyword = keyword.replace(/"/g, '').trim();
         this.offset = 0;
 
         // 是否数字，是的话直接请求单个铺面，否的话请求列表
-        if (this.keywords.match(/^\d+$|\/\d+/)) {
+        if (this.keyword.match(/^\d+$|\/\d+/)) {
             this.mapServe
-                .getMapInfo(this.keywords)
+                .getMapInfo(this.keyword)
                 .subscribe((res: MapSidDetail) => {
                     if (res) {
                         this.dialog.open(MapDetailContainerComponent, {
@@ -93,60 +63,70 @@ export class MapSearchContainerComponent implements OnInit {
 
     onSearch() {
         this.loading = true;
-
-        let query = [
-            `0=${this.pageSize}`,
-            `1=${this.offset}`,
-            `2=${this.typeCode}`,
-            `3=${this.keywords}`,
-        ];
-
-        if (this.typeCode === 4) {
-            query = query.concat(this.searchOptions);
-        }
-
-        this.mapServe.getMapList(query).subscribe((res: SearchMapResult) => {
+        const params = this.getParams();
+        this.mapServe.getMaplistV2(params).subscribe((res) => {
             this.results = res.data;
             this.offset = res.endid;
             this.loading = false;
         });
     }
 
-    onPagechange(type: string) {
-        switch (type) {
-            case 'next':
-                this.onSearch();
-                break;
-            case 'after':
-                if (this.offset - this.pageSize <= 0) {
-                    this.snackBar.open(
-                        'Is already the first pageFirst Page',
-                        'Close',
-                        { duration: 2000 }
-                    );
-                } else {
-                    this.offset =
-                        this.offset - this.pageSize <= 0
-                            ? 0
-                            : this.offset - 2 * this.pageSize;
-                    this.onSearch();
-                }
-                break;
-            default:
-                break;
-        }
-    }
+    private getParams() {
+        let params = {
+            limit: this.pageSize,
+            offset: this.offset,
+            type: this.searchType,
+            keyword: this.keyword,
+        };
 
-    private initOpts() {
-        const searchOpts = JSON.parse(localStorage.getItem(SEARCH_CHECKED_KEY));
-
-        if (searchOpts) {
-            Object.keys(searchOpts).forEach((key: string) => {
-                const total = (searchOpts[key] as number[]).reduce(
+        const checkedOpts = JSON.parse(
+            localStorage.getItem(SEARCH_CHECKED_KEY)
+        );
+        if (checkedOpts) {
+            let opts = {};
+            Object.keys(checkedOpts).forEach((key) => {
+                opts[key] = (checkedOpts[key] as number[]).reduce(
                     (prev, next) => prev + next
                 );
-                this.searchOptions.push(`${key}=${total}`);
             });
+
+            params = { ...params, ...opts };
         }
+
+        const sliderOpts = JSON.parse(localStorage.getItem(SEARCH_SLIDER_KEY));
+        if (sliderOpts) {
+            let opts = {};
+            Object.keys(sliderOpts).forEach((key) => {
+                opts[key] = [sliderOpts[key].low, sliderOpts[key].high];
+            });
+            params = { ...params, ...opts };
+        }
+
+        return params;
     }
+
+    // onPagechange(type: string) {
+    //     switch (type) {
+    //         case 'next':
+    //             this.onSearch();
+    //             break;
+    //         case 'after':
+    //             if (this.offset - this.pageSize <= 0) {
+    //                 this.snackBar.open(
+    //                     'Is already the first pageFirst Page',
+    //                     'Close',
+    //                     { duration: 2000 }
+    //                 );
+    //             } else {
+    //                 this.offset =
+    //                     this.offset - this.pageSize <= 0
+    //                         ? 0
+    //                         : this.offset - 2 * this.pageSize;
+    //                 this.onSearch();
+    //             }
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 }

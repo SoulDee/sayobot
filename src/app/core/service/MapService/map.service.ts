@@ -3,16 +3,19 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import {
     MapSidDetail,
     MapInfoResult,
-    SearchMapResult
+    SearchMapResult,
 } from 'app/shared/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MapSearchListParams } from '@app/types';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MapService {
     BASE_URL: string = 'https://api.sayobot.cn';
+
+    private readonly postApi = 'https://api.sayobot.cn/?post';
 
     constructor(private http: HttpClient) {}
 
@@ -21,7 +24,7 @@ export class MapService {
         return this.http
             .get(`${this.BASE_URL}/v2/beatmapinfo`, {
                 responseType: 'json',
-                params
+                params,
             })
             .pipe(map((res: MapInfoResult) => res.data));
     }
@@ -35,8 +38,16 @@ export class MapService {
         return this.http
             .get(queryUrl, {
                 responseType: 'json',
-                params
+                params,
             })
             .pipe(map((res: SearchMapResult) => res));
+    }
+
+    getMaplistV2(params: MapSearchListParams) {
+        const cmd = { cmd: 'beatmaplist', ...params };
+        return this.http.post<SearchMapResult>(
+            this.postApi,
+            JSON.stringify(cmd)
+        );
     }
 }

@@ -21,16 +21,6 @@ export class MapSearchBoxComponent {
     }
 
     openAdvanceOptions() {
-        this._dialog
-            .open(SearchAdvanceOptionsComponent)
-            .afterClosed()
-            .subscribe((res: { opts: number[] }) => {
-                if (res) {
-                    const result = Object.keys(res.opts).map(
-                        (key) => `${key}=${res.opts[key]}`
-                    );
-                    this.optChange.emit(result);
-                }
-            });
+        this._dialog.open(SearchAdvanceOptionsComponent);
     }
 }
