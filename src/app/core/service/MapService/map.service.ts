@@ -29,20 +29,6 @@ export class MapService {
             .pipe(map((res: MapInfoResult) => res.data));
     }
 
-    getMapList(query: string[]): Observable<SearchMapResult> {
-        const queryUrl = `${this.BASE_URL}/beatmaplist`;
-        const params = query
-            ? new HttpParams({ fromString: `${query.join('&')}` })
-            : {};
-
-        return this.http
-            .get(queryUrl, {
-                responseType: 'json',
-                params,
-            })
-            .pipe(map((res: SearchMapResult) => res));
-    }
-
     getMaplistV2(params: MapSearchListParams) {
         const cmd = { cmd: 'beatmaplist', ...params };
         return this.http.post<SearchMapResult>(

@@ -1,6 +1,17 @@
 <div class="container page">
     <ng-content></ng-content>
     <map-search-box (search)="search($event)"></map-search-box>
+    <ul class="search-bar">
+        {{
+            'searchCont.quick.title' | translate
+        }}：
+        <li class="quick-search" (click)="quickSearch('new')">
+            {{ 'searchCont.quick.new' | translate }}
+        </li>
+        <li class="quick-search" (click)="quickSearch('hot')">
+            {{ 'searchCont.quick.hot' | translate }}
+        </li>
+    </ul>
 
     <!-- <app-loading [loading]="loading"></app-loading> -->
     <map-search-results *ngIf="!loading" [maps]="results"></map-search-results>

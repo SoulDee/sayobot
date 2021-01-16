@@ -71,6 +71,13 @@ export class MapSearchContainerComponent implements OnInit {
         });
     }
 
+    quickSearch(type: SearchType) {
+        this.searchType = type;
+        this.offset = 0;
+        this.keyword = '';
+        this.onSearch();
+    }
+
     private getParams() {
         let params = {
             limit: this.pageSize,
