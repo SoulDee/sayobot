@@ -70,3 +70,12 @@
         right: 6px;
     }
 }
+
+@media (max-width: 1200px) {
+    .container {
+        padding-top: 10px;
+    }
+    .search-box-container {
+        margin-top: 10px;
+    }
+}

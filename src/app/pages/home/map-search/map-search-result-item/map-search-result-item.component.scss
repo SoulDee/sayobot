@@ -16,7 +16,7 @@ $padding-size: 1rem;
 
 .map-wrap {
     margin: 5px;
-    box-shadow: 0 1px 3px 2px #999;
+    box-shadow: 0 1px 2px 0px #ccc;
     border-radius: 5px;
     transition: all 0.3s;
     height: calc(100% - 10px);
@@ -24,7 +24,7 @@ $padding-size: 1rem;
     flex-direction: column;
 
     &:hover {
-        box-shadow: 0 1px 10px 1px #999;
+        box-shadow: 0 1px 12px 1px #ccc;
     }
 
     .img-wrap {
@@ -146,4 +146,12 @@ img::after {
     top: 0;
     background: url($no-load-ng) no-repeat center;
     background-size: contain;
+}
+
+@media (max-width: 800px) {
+    .map-wrap {
+        margin: 0;
+        box-shadow: 0 0 0 0;
+        border-radius: 0;
+    }
 }
