@@ -3,7 +3,7 @@
  */
 export interface MapSearchListParams {
     limit: number; // 单页数量
-    offset: number; // 第几页偏移量
+    offset?: number; // 第几页偏移量
     type: string; // 搜索类型
     keyword?: string; // 关键词
     subtype?: number; // 搜索子类型

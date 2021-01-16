@@ -1,6 +1,28 @@
 <div class="container page">
     <ng-content></ng-content>
-    <map-search-box (search)="search($event)"></map-search-box>
+
+    <div class="search-box-container">
+        <mat-icon
+            class="icon-m icon-options ab-center-y"
+            (click)="openAdvanceOptions()"
+            matTooltip="{{ 'searchCont.box.optTip' | translate }}"
+        >
+            menu</mat-icon
+        >
+        <input
+            class="box"
+            placeholder="{{ 'searchCont.placeholder' | translate }}"
+            #searchBox
+            (keyup.enter)="search(searchBox.value)"
+            [(ngModel)]="keyword"
+        />
+        <mat-icon
+            class="icon-m icon-search ab-center-y"
+            (click)="search(searchBox.value)"
+            >search</mat-icon
+        >
+    </div>
+
     <ul class="search-bar">
         {{
             'searchCont.quick.title' | translate
@@ -13,9 +35,19 @@
         </li>
     </ul>
 
-    <!-- <app-loading [loading]="loading"></app-loading> -->
+    <app-loading [loading]="loading"></app-loading>
     <map-search-results *ngIf="!loading" [maps]="results"></map-search-results>
 
-    <!-- <map-search-paginnator (change)="onPagechange($event)">
-    </map-search-paginnator> -->
+    <div class="paginnator">
+        <mat-icon
+            class="arrow left"
+            [class.disabled]="offsetStack.length <= 2"
+            (click)="prevPage()"
+        >
+            keyboard_arrow_left
+        </mat-icon>
+        <mat-icon class="arrow right" (click)="getMapList()">
+            keyboard_arrow_right
+        </mat-icon>
+    </div>
 </div>

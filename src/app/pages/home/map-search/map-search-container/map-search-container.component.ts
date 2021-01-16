@@ -5,7 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { MapDetailContainerComponent } from '../../map-detail/map-detail-container';
 import { SEARCH_CHECKED_KEY, SEARCH_SLIDER_KEY } from '@app/core/config';
-import { SearchType } from '@app/types';
+import { SearchType, sumByArr } from '@app/types';
+import { SearchAdvanceOptionsComponent } from '../../components';
+
+const MAP_PAGE_SIZE = 25;
 
 @Component({
     selector: 'map-search-container',
@@ -13,127 +16,122 @@ import { SearchType } from '@app/types';
     styleUrls: ['./map-search-container.component.scss'],
 })
 export class MapSearchContainerComponent implements OnInit {
-    keyword: string = '';
-
     results: PreMap[];
-
-    offset: number = 0;
-    pageSize: number = 20;
-
-    loading: boolean = false;
-
+    keyword: string = '';
     searchType: SearchType = SearchType.Search;
 
+    // 考虑到 map id并不是连续的，而是中间有空缺，因此不能使用通常的翻页逻辑，而是通过一个栈来存储
+    offsetStack: number[] = [0];
+    loading: boolean = false;
+
     constructor(
+        private _dialog: MatDialog,
         private mapServe: MapService,
-        private dialog: MatDialog,
         private activeRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.activeRoute.queryParamMap.subscribe((params) => {
-            if (params.get('search')) {
-                this.search(params.get('search'));
-            }
+            if (params.get('search')) this.search(params.get('search'));
         });
+
+        this.quickSearch(SearchType.New);
     }
 
     search(keyword: any) {
+        this.searchType = SearchType.Search;
         this.keyword = keyword.replace(/"/g, '').trim();
-        this.offset = 0;
+        this.offsetStack = [0];
 
-        // 是否数字，是的话直接请求单个铺面，否的话请求列表
-        if (this.keyword.match(/^\d+$|\/\d+/)) {
-            this.mapServe
-                .getMapInfo(this.keyword)
-                .subscribe((res: MapSidDetail) => {
-                    if (res) {
-                        this.dialog.open(MapDetailContainerComponent, {
-                            panelClass: 'common-dialog',
-                            data: { id: res.sid, content: res },
-                        });
-                    } else {
-                        this.onSearch();
-                    }
-                });
-        } else {
-            this.onSearch();
-        }
+        const isDigital = this.keyword.match(/^\d+$|\/\d+/);
+        isDigital ? this.getMapDetail() : this.getMapList();
     }
 
-    onSearch() {
+    getMapList() {
         this.loading = true;
         const params = this.getParams();
         this.mapServe.getMaplistV2(params).subscribe((res) => {
+            this.offsetStack.push(res.endid);
             this.results = res.data;
-            this.offset = res.endid;
             this.loading = false;
+            this.keyword = '';
         });
+    }
+
+    getMapDetail() {
+        this.mapServe
+            .getMapInfo(this.keyword)
+            .subscribe((res: MapSidDetail) => {
+                if (res) {
+                    this._dialog.open(MapDetailContainerComponent, {
+                        panelClass: 'common-dialog',
+                        data: { id: res.sid, content: res },
+                    });
+                    this.keyword = '';
+                } else {
+                    this.getMapList();
+                }
+            });
+    }
+
+    openAdvanceOptions() {
+        this._dialog
+            .open(SearchAdvanceOptionsComponent)
+            .afterClosed()
+            .subscribe(
+                (res: { success: boolean }) =>
+                    res?.success && this.search(this.keyword)
+            );
     }
 
     quickSearch(type: SearchType) {
         this.searchType = type;
-        this.offset = 0;
+        this.offsetStack = [0];
         this.keyword = '';
-        this.onSearch();
+        this.getMapList();
+    }
+
+    prevPage() {
+        if (this.offsetStack.length <= 2) return;
+        this.offsetStack.pop();
+        this.offsetStack.pop();
+        this.getMapList();
     }
 
     private getParams() {
+        const offset = this.offsetStack[this.offsetStack.length - 1];
         let params = {
-            limit: this.pageSize,
-            offset: this.offset,
+            limit: MAP_PAGE_SIZE,
+            offset,
             type: this.searchType,
-            keyword: this.keyword,
         };
 
-        const checkedOpts = JSON.parse(
-            localStorage.getItem(SEARCH_CHECKED_KEY)
-        );
-        if (checkedOpts) {
-            let opts = {};
-            Object.keys(checkedOpts).forEach((key) => {
-                opts[key] = (checkedOpts[key] as number[]).reduce(
-                    (prev, next) => prev + next
-                );
-            });
+        if (this.searchType === SearchType.Search) {
+            params['keyword'] = this.keyword;
 
-            params = { ...params, ...opts };
-        }
+            const checkedOpts = JSON.parse(
+                localStorage.getItem(SEARCH_CHECKED_KEY)
+            );
+            if (checkedOpts) {
+                let opts = {};
+                Object.keys(checkedOpts).forEach((key) => {
+                    opts[key] = (checkedOpts[key] as number[]).reduce(sumByArr);
+                });
+                params = { ...params, ...opts };
+            }
 
-        const sliderOpts = JSON.parse(localStorage.getItem(SEARCH_SLIDER_KEY));
-        if (sliderOpts) {
-            let opts = {};
-            Object.keys(sliderOpts).forEach((key) => {
-                opts[key] = [sliderOpts[key].low, sliderOpts[key].high];
-            });
-            params = { ...params, ...opts };
+            const sliderOpts = JSON.parse(
+                localStorage.getItem(SEARCH_SLIDER_KEY)
+            );
+            if (sliderOpts) {
+                let opts = {};
+                Object.keys(sliderOpts).forEach((key) => {
+                    opts[key] = [sliderOpts[key].low, sliderOpts[key].high];
+                });
+                params = { ...params, ...opts };
+            }
         }
 
         return params;
     }
-
-    // onPagechange(type: string) {
-    //     switch (type) {
-    //         case 'next':
-    //             this.onSearch();
-    //             break;
-    //         case 'after':
-    //             if (this.offset - this.pageSize <= 0) {
-    //                 this.snackBar.open(
-    //                     'Is already the first pageFirst Page',
-    //                     'Close',
-    //                     { duration: 2000 }
-    //                 );
-    //             } else {
-    //                 this.offset =
-    //                     this.offset - this.pageSize <= 0
-    //                         ? 0
-    //                         : this.offset - 2 * this.pageSize;
-    //                 this.onSearch();
-    //             }
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
 }
