@@ -8,28 +8,6 @@
     }
 
     .range-slider-content {
-        flex: 1;
-        display: flex;
-        justify-content: space-between;
-
-        .slider-item {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            margin-right: 3rem;
-
-            .slider-label {
-                margin-right: 0.5rem;
-            }
-
-            .mat-slider {
-                margin-right: 0.5rem;
-                flex: 1;
-            }
-
-            input[type='number'] {
-                width: 4rem;
-            }
-        }
+        width: 90%;
     }
 }

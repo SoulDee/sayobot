@@ -26,6 +26,7 @@
     },
     "searchCtx": {
         "placeholder": "在这里输入什么吧",
+        "selectRange": "选择区间",
         "quick": {
             "title": "快捷搜索",
             "new": "最新",

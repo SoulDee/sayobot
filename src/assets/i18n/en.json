@@ -26,6 +26,7 @@
     },
     "searchCtx": {
         "placeholder": "What to enter here...",
+        "selectRange": "Select Range",
         "quick": {
             "title": "Quick search",
             "new": "New",

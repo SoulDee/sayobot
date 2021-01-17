@@ -1,0 +1,26 @@
+::ng-deep {
+    .custom-slider .ngx-slider .ngx-slider-pointer {
+        width: 10px;
+        height: 10px;
+        background-color: #000;
+        top: -3px;
+        &::after {
+            display: none;
+        }
+    }
+    .custom-slider .ngx-slider .ngx-slider-selection {
+        background-color: #ff4081;
+    }
+}
+
+.custom-slider {
+    display: flex;
+    align-items: center;
+    .select-range {
+        width: 80px;
+        margin-left: 1rem;
+        .mat-form-field {
+            margin-top: -6px;
+        }
+    }
+}

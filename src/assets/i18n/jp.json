@@ -26,6 +26,7 @@
     },
     "searchCtx": {
         "placeholder": "ここに入力するもの",
+        "selectRange": "範囲を選択",
         "quick": {
             "title": "クイックサーチ",
             "new": "最新",

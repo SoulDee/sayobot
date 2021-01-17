@@ -44,8 +44,8 @@ export class RangeOptionComponent implements OnInit {
             this.rangeOpt.key
         );
 
-        this.low = sliderOpt ? sliderOpt.low : this.rangeOpt.min;
-        this.high = sliderOpt ? sliderOpt.high : this.rangeOpt.max;
+        this.low = sliderOpt ? sliderOpt.low : 0;
+        this.high = sliderOpt ? sliderOpt.high : 10;
     }
 
     private getLimit(n: number) {

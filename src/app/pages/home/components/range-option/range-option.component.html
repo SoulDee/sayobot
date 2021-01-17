@@ -3,39 +3,10 @@
         {{ rangeOpt?.title }}
     </div>
     <div class="range-slider-content">
-        <div class="slider-item">
-            <div class="slider-label">Low</div>
-            <mat-slider
-                thumbLabel
-                [max]="rangeOpt?.max"
-                [min]="rangeOpt?.min"
-                [step]="0.1"
-                [(ngModel)]="low"
-            >
-            </mat-slider>
-            <input
-                type="number"
-                [max]="rangeOpt?.max"
-                [min]="rangeOpt?.min"
-                [(ngModel)]="low"
-            />
-        </div>
-        <div class="slider-item">
-            <div class="slider-label">High</div>
-            <mat-slider
-                thumbLabel
-                [max]="rangeOpt?.max"
-                [min]="rangeOpt?.min"
-                [step]="0.1"
-                [(ngModel)]="high"
-            >
-            </mat-slider>
-            <input
-                type="number"
-                [max]="rangeOpt?.max"
-                [min]="rangeOpt?.min"
-                [(ngModel)]="high"
-            />
-        </div>
+        <sayo-range-slider
+            [low]="low"
+            [high]="high"
+            (change)="low = $event.low; high = $event.high"
+        ></sayo-range-slider>
     </div>
 </div>

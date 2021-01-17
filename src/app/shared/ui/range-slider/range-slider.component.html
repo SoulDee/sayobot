@@ -1,0 +1,25 @@
+<div class="custom-slider">
+    <ngx-slider
+        *ngIf="options"
+        [(value)]="lowValue"
+        [(highValue)]="highValue"
+        [options]="options"
+        (userChange)="_changeValue()"
+        (valueChange)="_changeValue()"
+        (highValueChange)="_changeValue()"
+    ></ngx-slider>
+
+    <div class="select-range">
+        <mat-select
+            [(value)]="rangeOpt"
+            (selectionChange)="_changeRange($event.value)"
+        >
+            <mat-option disabled>{{
+                'searchCtx.selectRange' | translate
+            }}</mat-option>
+            <mat-option value="ten">1-10</mat-option>
+            <mat-option value="hundred">1-100</mat-option>
+            <mat-option value="thousand">1-1000</mat-option>
+        </mat-select>
+    </div>
+</div>
