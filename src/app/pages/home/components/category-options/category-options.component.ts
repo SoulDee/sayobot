@@ -34,8 +34,6 @@ export class CategoryOptionsComponent implements OnInit {
         }
 
         this._updateCheckStatus();
-
-        console.log(this.selected.size);
     }
 
     _updateCheckStatus() {

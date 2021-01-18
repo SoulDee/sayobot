@@ -20,6 +20,7 @@ import {
     HelpDialogComponent,
     AnnounceComponent,
 } from './components';
+import { PRIVIDER_CONFIG } from './providers';
 
 const components = [
     HeaderComponent,
@@ -41,6 +42,7 @@ const components = [
         TranslateModule.forRoot(translateConfig),
     ],
     exports: [SharedModule, AppRoutingModule, ...components],
+    providers: PRIVIDER_CONFIG,
 })
 export class CoreModule {
     constructor(

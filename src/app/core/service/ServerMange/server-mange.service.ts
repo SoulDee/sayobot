@@ -5,7 +5,7 @@ import { ServerItem } from '@app/shared/models';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class ServerMangeService {
     BASE_URL: string = 'https://api.sayobot.cn/';

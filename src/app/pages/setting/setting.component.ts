@@ -4,7 +4,6 @@ import { ServerItem } from '@app/shared/models';
 
 // TODO 设置项添加：是否打开 tip 小提示，让使用者可以关闭
 @Component({
-    selector: 'app-setting',
     templateUrl: './setting.component.html',
     styleUrls: ['./setting.component.scss'],
 })
