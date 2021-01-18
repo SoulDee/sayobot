@@ -1,11 +1,7 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-    PlayMusicService,
-    ServerMangeService,
-    MusicItem,
-} from '@app/core/service';
+import { PlayMusicService, MusicItem } from '@app/core/service';
 import { downloadFile } from '@app/utils';
 import { MapSidDetail, MapBidDetail, Approved } from '@app/shared/models';
 import { Clipboard } from '@angular/cdk/clipboard';
@@ -18,8 +14,6 @@ import { Clipboard } from '@angular/cdk/clipboard';
 })
 export class MapDetailContainerComponent implements OnInit, OnDestroy {
     BASE_URL = 'https://txy1.sayobot.cn/beatmaps/download/';
-
-    sid: number;
     mapDetail: MapSidDetail; // 铺面详情
     imgUrl: string; // 图片链接
     parttime: number; // 试听剩余时间
@@ -37,36 +31,26 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private musicBox: PlayMusicService,
-        public serverMange: ServerMangeService,
         private snackBar: MatSnackBar,
-        private dialogRef: MatDialogRef<MapDetailContainerComponent>,
         private clipboard: Clipboard
     ) {}
 
     ngOnInit() {
-        this.sid = this.data.content.sid;
-        this.imgUrl = `https://a.sayobot.cn/beatmaps/${this.sid}/covers/cover.webp?0`;
-
         this.mapDetail = this.data.content;
         this.detailInfo = this.mapDetail.bid_data[0];
-    }
-
-    get approved() {
-        return Approved[this.mapDetail.approved];
+        this.imgUrl = `https://a.sayobot.cn/beatmaps/${this.mapDetail.sid}/covers/cover.webp?0`;
     }
 
     get link() {
         return `http://osugame.online/preview.html?sid=${this.mapDetail.sid}&bid=${this.detailInfo.bid}`;
     }
 
-    onClose() {
-        this.dialogRef.close();
-    }
-
     // 点击下载事件
     onDownLoad(url: string) {
         const server = localStorage.getItem('server');
-        downloadFile(`${this.BASE_URL}${url}/${this.sid}?server=${server}`);
+        downloadFile(
+            `${this.BASE_URL}${url}/${this.mapDetail.sid}?server=${server}`
+        );
 
         this.isMapDownload = true;
         this.mapTimer = setTimeout(() => {
@@ -78,22 +62,16 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
     // 点击下载不带视频的事件
     onUnvedioDownload(url: string) {
         const server = localStorage.getItem('server');
-        downloadFile(`${this.BASE_URL}${url}/${this.sid}?server=${server}`);
+        downloadFile(
+            `${this.BASE_URL}${url}/${this.mapDetail.sid}?server=${
+                server || '0'
+            }`
+        );
         this.isMapUnvedioDownload = true;
         this.mapUnvedioTimer = setTimeout(() => {
             this.isMapUnvedioDownload = false;
             clearTimeout(this.mapUnvedioTimer);
         }, 15000);
-    }
-
-    // 点击难度变更数据
-    difficultChange(bidData: MapBidDetail) {
-        this.detailInfo = bidData;
-    }
-
-    // 点击标签出发搜索后关闭面板
-    onTagSearch() {
-        this.dialogRef.close();
     }
 
     // 试听歌曲
@@ -121,13 +99,9 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
 
     // 将当前铺面复制到剪切板
     shared() {
-        const sharedInfo = `https://osu.sayobot.cn/?search=${this.sid}`;
-
+        const sharedInfo = `https://osu.sayobot.cn/?search=${this.mapDetail.sid}`;
         this.clipboard.copy(sharedInfo);
-
-        this.snackBar.open('已复制：', sharedInfo, {
-            duration: 2000,
-        });
+        this.snackBar.open('已复制：', sharedInfo);
     }
 
     ngOnDestroy() {

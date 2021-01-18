@@ -1,109 +1,95 @@
-<div class="map-detail-container" *ngIf="mapDetail">
+<div class="map-detail-wrapper" *ngIf="mapDetail">
     <div class="img-box">
-        <span class="status">{{ approved | uppercase }}</span>
-        <span class="sid-float">SID : {{ sid }}</span>
-        <mat-icon class="close-btn" (click)="onClose()">close</mat-icon>
+        <mat-icon class="close-btn" matDialogClose>close</mat-icon>
         <!-- <map-detail-tags [content]="mapDetail.tags"></map-detail-tags> -->
         <img [src]="imgUrl" alt="" />
         <map-detail-level
             [bidDataList]="mapDetail.bid_data"
-            (switch)="difficultChange($event)"
+            (switch)="detailInfo = $event"
         ></map-detail-level>
     </div>
 
-    <div class="detail">
-        <map-detail-info [detail]="mapDetail" [info]="detailInfo">
-        </map-detail-info>
-        <map-detail-charts [mapData]="detailInfo"></map-detail-charts>
-
-        <div class="actions flex-center">
-            <button
-                mat-raised-button
-                color="accent"
-                *ngIf="musicTimer"
-                disabled
-                class="flex-center"
-            >
-                <span *ngIf="parttime">{{ parttime }}s</span>
-                <img *ngIf="!parttime" src="assets/img/common/loading.gif" />
-            </button>
-
-            <button
-                mat-raised-button
-                color="accent"
-                *ngIf="!musicTimer"
-                (click)="playPart()"
-                class="flex-center"
-            >
-                {{ 'mapDetail.action.preListen' | translate }}
-            </button>
-
-            <a
-                mat-raised-button
-                color="accent"
-                [href]="link"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                {{ 'mapDetail.action.preview' | translate }}</a
-            >
-
-            <button
-                mat-raised-button
-                color="accent"
-                (click)="onDownLoad('full')"
-                [disabled]="isMapDownload"
-                class="flex-center"
-            >
-                <span *ngIf="!isMapDownload">{{
-                    'mapDetail.action.down' | translate
-                }}</span>
-                <img
-                    *ngIf="isMapDownload"
-                    src="assets/img/common/loading.gif"
-                />
-            </button>
-
-            <button
-                mat-raised-button
-                color="accent"
-                (click)="onUnvedioDownload('novideo')"
-                [disabled]="isMapUnvedioDownload"
-                class="flex-center"
-            >
-                <span *ngIf="!isMapUnvedioDownload">{{
-                    'mapDetail.action.downNotVideo' | translate
-                }}</span>
-                <img
-                    *ngIf="isMapUnvedioDownload"
-                    src="assets/img/common/loading.gif"
-                />
-            </button>
-
-            <button
-                mat-raised-button
-                color="accent"
-                (click)="onDownLoad('mini')"
-                [disabled]="isMapDownload"
-                class="flex-center"
-            >
-                <span *ngIf="!isMapDownload">{{
-                    'mapDetail.action.dewnMini' | translate
-                }}</span>
-                <img
-                    *ngIf="isMapDownload"
-                    src="assets/img/common/loading.gif"
-                />
-            </button>
-
-            <button
-                mat-raised-button
-                class="flex-center"
-                color="accent"
-                (click)="shared()"
-            >
-                {{ 'mapDetail.action.share' | translate }}
-            </button>
+    <div class="map-detail-container">
+        <h1 class="map-title one-line">{{ mapDetail?.title }}</h1>
+        <div class="map-content">
+            <map-detail-info [detail]="mapDetail" [info]="detailInfo">
+            </map-detail-info>
+            <map-detail-charts [mapData]="detailInfo"></map-detail-charts>
         </div>
     </div>
+
+    <div class="actions flex-center">
+        <button
+            mat-raised-button
+            color="accent"
+            *ngIf="musicTimer"
+            disabled
+            class="flex-center"
+        >
+            <span *ngIf="parttime; else downLoading">{{ parttime }}s</span>
+        </button>
+
+        <button
+            mat-raised-button
+            color="accent"
+            *ngIf="!musicTimer"
+            (click)="playPart()"
+            class="flex-center"
+        >
+            {{ 'mapDetail.action.preListen' | translate }}
+        </button>
+
+        <a mat-raised-button color="accent" [href]="link" target="_blank">
+            {{ 'mapDetail.action.preview' | translate }}
+        </a>
+
+        <button
+            mat-raised-button
+            color="accent"
+            (click)="onDownLoad('full')"
+            [disabled]="isMapDownload"
+            class="flex-center"
+        >
+            <span *ngIf="!isMapDownload; else downLoading">
+                {{ 'mapDetail.action.down' | translate }}
+            </span>
+        </button>
+
+        <button
+            mat-raised-button
+            color="accent"
+            (click)="onUnvedioDownload('novideo')"
+            [disabled]="isMapUnvedioDownload"
+            class="flex-center"
+        >
+            <span *ngIf="!isMapUnvedioDownload; else downLoading">
+                {{ 'mapDetail.action.downNotVideo' | translate }}
+            </span>
+        </button>
+
+        <button
+            mat-raised-button
+            color="accent"
+            (click)="onDownLoad('mini')"
+            [disabled]="isMapDownload"
+            class="flex-center"
+        >
+            <span *ngIf="!isMapDownload; else downLoading">
+                {{ 'mapDetail.action.dewnMini' | translate }}
+            </span>
+        </button>
+
+        <button
+            mat-raised-button
+            class="flex-center"
+            color="accent"
+            (click)="shared()"
+        >
+            {{ 'mapDetail.action.share' | translate }}
+        </button>
+    </div>
 </div>
+
+<ng-template #downLoading>
+    <img src="assets/img/common/loading.gif" />
+</ng-template>

@@ -65,6 +65,7 @@ export class MapSearchContainerComponent implements OnInit {
                     this._dialog.open(MapDetailContainerComponent, {
                         panelClass: 'common-dialog',
                         data: { id: res.sid, content: res },
+                        width: '1300px',
                     });
                 } else {
                     this.getMapList();

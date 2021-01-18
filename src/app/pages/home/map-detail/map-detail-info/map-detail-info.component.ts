@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Approved } from '@app/shared/models';
 import { Language, Genre } from './meta';
 
-// TODO 对数据进行分组，改善 UI
-// TODO 难度等 number 类型可以考虑可视化
 @Component({
     selector: 'map-detail-info',
     templateUrl: './map-detail-info.component.html',
@@ -30,5 +29,9 @@ export class MapDetailInfoComponent implements OnInit {
         const mouth = dateObj.getMonth() + 1;
         const hour = dateObj.getHours();
         return `${year} - ${mouth} - ${hour}`;
+    }
+
+    get approved() {
+        return Approved[this.detail.approved];
     }
 }

@@ -1,74 +1,65 @@
 $no-load-ng: '/assets/img/home/nobg.jpg';
-@mixin float-label($top: 0.5rem, $left: 0.5rem) {
-    position: absolute;
-    left: $left;
-    top: $top;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 0.5rem;
-    padding: 0.15rem 0.5rem;
-    color: #fff;
-    z-index: 1;
+
+.img-box {
+    position: relative;
     font-size: 0.6em;
 
-    i {
-        font-size: 16px;
+    .close-btn {
+        cursor: pointer;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+        font-size: 2rem;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 10;
+        color: #fff;
+    }
+}
+.map-detail-container {
+    padding: 1em;
+
+    .map-title {
+        margin-bottom: 2rem;
+    }
+
+    .map-content {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 300px;
+
+        map-detail-info {
+            display: block;
+            width: 300px;
+            height: 100%;
+        }
+
+        map-detail-charts {
+            height: 100%;
+            display: block;
+            flex: 1;
+        }
     }
 }
 
-.map-detail-container {
-    .img-box {
-        position: relative;
-        font-size: 0.6em;
-        .status {
-            @include float-label(2.2rem);
-        }
-        .sid-float {
-            @include float-label();
-        }
-        .close-btn {
-            position: absolute;
-            right: 0.5rem;
-            top: 0.5rem;
-            width: 2rem;
-            height: 2rem;
-            line-height: 2rem;
-            font-size: 2rem;
-            border-radius: 50%;
-            outline: none;
-            background: #fff;
-            z-index: 10;
-        }
-    }
-    .detail {
-        padding: 1em;
-        .actions {
-            margin: 1rem 0;
-            button {
-                margin: 0 0.5em;
-                img {
-                    height: 16px;
-                    width: 16px;
-                }
-            }
+.actions {
+    margin: 3rem 0;
+    button {
+        margin: 0 0.5em;
+        height: 36px;
+        img {
+            width: 16px;
+            height: 16px;
+            margin: 0 auto;
         }
     }
 }
 
 @media (max-width: 900px) {
-    .map-detail {
-        .img-box {
-            map-tags {
-                display: none;
-            }
-        }
-        .detail {
-            .actions {
-                .small-hide {
-                    display: none;
-                }
-            }
-        }
-    }
 }
 
 img {

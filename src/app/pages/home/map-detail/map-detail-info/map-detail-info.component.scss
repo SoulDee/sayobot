@@ -1,32 +1,25 @@
 .items {
-    display: grid;
-    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-    grid-column-gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    color: #fff;
+    padding: 1rem;
+    height: 100%;
     .item {
         display: flex;
-        flex: 0 0 33.33%;
-        margin: 0.1rem 0;
+        align-items: center;
         .label {
-            flex: 1;
-            text-align: left;
+            width: 100px;
             font-weight: bold;
         }
         .content {
-            display: inline-block;
-            width: 100px;
+            flex: 1;
         }
     }
 }
 
 @media (max-width: 900px) {
-    .items {
-        grid-template: repeat(4, 1fr) / repeat(2, 1fr);
-        font-size: 0.6rem;
-        .item {
-            font-size: 0.8em;
-            .label {
-                text-align: left;
-            }
-        }
-    }
 }

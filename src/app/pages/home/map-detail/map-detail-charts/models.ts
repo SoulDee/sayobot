@@ -12,8 +12,8 @@ export const radar_option = {
             { name: 'AR', max: 10 },
             { name: 'CS', max: 10 },
             { name: 'HP', max: 10 },
-            { name: 'OD', max: 10 }
-            // { name: 'AIM', max: 10 },
+            { name: 'OD', max: 10 },
+            { name: 'AIM', max: 10 },
         ]
     },
     series: [

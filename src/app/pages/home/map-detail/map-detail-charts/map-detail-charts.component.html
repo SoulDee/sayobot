@@ -1,11 +1,30 @@
 <div class="map-detail-echart">
-    <div>
+    <div class="switch-btns">
+        <mat-radio-group [(ngModel)]="chartType">
+            <mat-radio-button value="radar">雷达图</mat-radio-button>
+            <mat-radio-button value="currve">曲线图</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <ng-container *ngIf="chartType === 'radar'">
+        <div class="radar-wrapper">
+            <div
+                class="map-detail-radar-echart"
+                echarts
+                [options]="radarOptions"
+            ></div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="chartType === 'currve'">
         <div
+            *ngIf="currveOptions; else noData"
             echarts
-            [options]="radarOptions"
-            class="map-detail-radar-echart"
+            [options]="currveOptions"
+            class="map-detail-curve-echart"
         ></div>
-        <div class="progress-wrapper">
+
+        <div *ngIf="currveOptions" class="progress-wrapper">
             <mat-progress-bar mode="determinate" [value]="rangeValue">
             </mat-progress-bar>
             <div class="count">
@@ -13,11 +32,11 @@
                 <span>{{ speed | number: '0.0-2' }}</span>
             </div>
         </div>
-    </div>
-
-    <div
-        echarts
-        [options]="currveOptions"
-        class="map-detail-curve-echart"
-    ></div>
+    </ng-container>
 </div>
+
+<ng-template #noData>
+    <div class="empty">
+        <div class="float-label">暂无数据</div>
+    </div>
+</ng-template>

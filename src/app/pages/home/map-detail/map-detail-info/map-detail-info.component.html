@@ -1,80 +1,56 @@
-<h1 class="title one-line">{{ detail.title }}</h1>
 <div class="items">
     <div class="item">
+        <label class="label one-line">SID</label>
+        <span class="content one-line">{{ detail?.sid }}</span>
+    </div>
+
+    <div class="item">
+        <label class="label one-line">State</label>
+        <span class="content one-line">{{ approved | uppercase }}</span>
+    </div>
+
+    <div class="item">
         <label class="label one-line">Creater</label>
-        <span
-            class="content one-line"
-            *ngIf="detail.creator; else noData"
-            title="{{ detail.creator }}"
-            >{{ detail.creator }}</span
-        >
+        <span class="content one-line">{{ detail?.creator }}</span>
     </div>
-
-    <div class="item">
-        <label class="label one-line">BPM</label>
-        <span class="content one-line" *ngIf="detail.bpm; else noData">{{
-            detail.bpm
-        }}</span>
-    </div>
-
-    <div class="item">
-        <label class="label one-line">Max Combo</label>
-        <span class="content one-line" *ngIf="info.maxcombo; else noData">{{
-            info?.maxcombo
-        }}</span>
-    </div>
-
     <div class="item">
         <label class="label one-line">Artist</label>
-        <span
-            class="content one-line"
-            *ngIf="detail.artist; else noData"
-            title="{{ detail.artist }}"
-            >{{ detail.artist }}</span
-        >
+        <span class="content one-line">{{ detail.artist }}</span>
     </div>
-
-    <div class="item">
-        <label class="label one-line">Length</label>
-        <span class="content one-line" *ngIf="info.length; else noData">{{
-            info.length
-        }}</span>
-    </div>
-
-    <div class="item">
-        <label class="label one-line">Language</label>
-        <span class="content one-line" *ngIf="detail.language; else noData">{{
-            getLanguage(detail.language)
-        }}</span>
-    </div>
-
     <div class="item">
         <label class="label one-line">Source</label>
-        <span
-            class="content one-line"
-            *ngIf="detail.source; else noData"
-            title="{{ detail.source }}"
-            >{{ detail.source }}</span
-        >
+        <span class="content one-line">{{ detail.source }}</span>
     </div>
 
     <div class="item">
         <label class="label one-line">Genre</label>
-        <span class="content one-line" *ngIf="detail.genre; else noData">{{
-            getGenre(detail.genre)
+        <span class="content one-line">{{ getGenre(detail?.genre) }}</span>
+    </div>
+
+    <div class="item">
+        <label class="label one-line">BPM</label>
+        <span class="content one-line">{{ detail?.bpm }}</span>
+    </div>
+
+    <div class="item">
+        <label class="label one-line">Max Combo</label>
+        <span class="content one-line">{{ info?.maxcombo }}</span>
+    </div>
+
+    <div class="item">
+        <label class="label one-line">Length</label>
+        <span class="content one-line">{{ info?.length }}</span>
+    </div>
+
+    <div class="item">
+        <label class="label one-line">Language</label>
+        <span class="content one-line">{{
+            getLanguage(detail?.language)
         }}</span>
     </div>
 
     <div class="item">
         <label class="label one-line">Upload time</label>
-        <span
-            class="content one-line"
-            *ngIf="detail.approved_date; else noData"
-            >{{ getDate(detail.last_update) }}</span
-        >
+        <span class="content one-line">{{ getDate(detail?.last_update) }}</span>
     </div>
 </div>
-
-<ng-template #noData>
-    <span class="content">--</span>
-</ng-template>

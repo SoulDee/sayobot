@@ -67,6 +67,8 @@ export class MapSearchResultItemComponent implements OnInit {
                 this.dialog.open(MapDetailContainerComponent, {
                     panelClass: 'common-dialog',
                     data: { content: res },
+                    width: '1300px',
+                    maxWidth: '100vw',
                 });
             });
     }

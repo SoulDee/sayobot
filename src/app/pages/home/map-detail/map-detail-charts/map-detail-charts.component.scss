@@ -1,6 +1,8 @@
 .map-detail-echart {
     display: flex;
     justify-content: space-around;
+    position: relative;
+    height: 100%;
 }
 
 .map-detail-radar-echart {
@@ -10,7 +12,25 @@
 
 .map-detail-curve-echart {
     height: 300px;
-    width: 600px;
+    flex: 1;
+}
+
+.progress-wrapper {
+    position: absolute;
+    left: 80px;
+    width: 86%;
+    bottom: 0;
+}
+
+.switch-btns {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    .mat-radio-button {
+        font-size: 12px;
+        margin-left: 1rem;
+    }
 }
 
 .count {
@@ -18,13 +38,23 @@
     justify-content: space-between;
 }
 
+.empty {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .float-label {
+        padding: 10px 20px;
+        border-radius: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        outline: none;
+        position: relative;
+        color: #000;
+        background: #fff;
+        border: 2px solid #f0f0f0;
+    }
+}
+
 @media (max-width: 900px) {
-    .map-detail-radar-echart,
-    .progress-wrapper {
-        display: none;
-    }
-    .map-detail-curve-echart {
-        height: 300px;
-        width: 100%;
-    }
 }

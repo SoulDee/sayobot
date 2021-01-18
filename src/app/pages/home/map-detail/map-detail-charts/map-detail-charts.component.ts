@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { radar_option, curve_option } from './models';
 
-// TODO 去除 echarts 的动画
-// TODO 拆分成两个表单，通过ng-content插入
-// TODO 不要一下全部显示，通过按钮组来对表单分类
 @Component({
     selector: 'map-detail-charts',
     templateUrl: './map-detail-charts.component.html',
@@ -18,6 +15,8 @@ export class MapDetailChartsComponent implements OnInit {
 
     radarOptions: any;
     currveOptions: any;
+
+    chartType = 'currve';
 
     @Input()
     set mapData(detail) {
@@ -58,7 +57,13 @@ export class MapDetailChartsComponent implements OnInit {
         const total = aim.map(
             (count, index) => Number(count) + Number(speed[index])
         );
-        curve_option.series[0].data = total;
-        this.currveOptions = { ...curve_option };
+
+        if (total.length > 0) {
+            curve_option.series[0].data = total;
+            this.currveOptions = { ...curve_option };
+        } else {
+            this.currveOptions = null;
+            this.chartType = 'radar';
+        }
     }
 }
