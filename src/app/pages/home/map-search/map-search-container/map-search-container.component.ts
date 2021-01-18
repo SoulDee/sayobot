@@ -66,6 +66,7 @@ export class MapSearchContainerComponent implements OnInit {
                         panelClass: 'common-dialog',
                         data: { id: res.sid, content: res },
                         width: '1300px',
+                        maxWidth: '100vw',
                     });
                 } else {
                     this.getMapList();
