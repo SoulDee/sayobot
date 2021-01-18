@@ -34,6 +34,8 @@ export class CategoryOptionsComponent implements OnInit {
         }
 
         this._updateCheckStatus();
+
+        console.log(this.selected.size);
     }
 
     _updateCheckStatus() {
@@ -53,7 +55,13 @@ export class CategoryOptionsComponent implements OnInit {
 
     _handleInsChange(checked: boolean, key: number) {
         checked ? this.selected.add(key) : this.selected.delete(key);
-        this._updateCheckStatus();
+
+        if (this.selected.size === 0) {
+            this._masterToggoe(false);
+            this.isAllSelected = false;
+        } else {
+            this._updateCheckStatus();
+        }
     }
 
     private handleChange() {
