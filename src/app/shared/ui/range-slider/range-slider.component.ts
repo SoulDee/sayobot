@@ -1,5 +1,6 @@
 import { Options } from '@angular-slider/ngx-slider';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RangeItem } from '@app/types';
 
 type Level = 'ten' | 'hundred' | 'thousand';
 interface Range {
@@ -23,27 +24,44 @@ const DefaulOpt = { floor: 0, ceil: 10, step: 0.1 };
 export class RangeSliderComponent implements OnInit {
     @Input() low: number;
     @Input() high: number;
+    @Input() checked: boolean = true;
     @Input() level: Level;
 
-    @Output() change = new EventEmitter<Range>();
+    @Output() change = new EventEmitter<RangeItem>();
 
     rangeOpt = 'ten';
-
     options: Options;
-
+    _checked = true;
     lowValue = 0;
     highValue = 10;
 
     ngOnInit() {
         this.lowValue = this.low;
         this.highValue = this.high;
-
-        console.log(this.low, this.high);
+        this._checked = this.checked;
 
         setTimeout(() => {
             const range = this._getRange();
             this._updateOptions(range);
-        }, 150);
+        }, 200);
+    }
+
+    _toggleState(checked: boolean) {
+        this._checked = checked;
+        this._changeValue();
+    }
+
+    _changeValue() {
+        const rangeItem = {
+            low: this.lowValue,
+            high: this.highValue,
+            checked: this._checked,
+        };
+        this.change.emit(rangeItem);
+    }
+
+    _changeRange(type: string) {
+        this._updateOptions(RangeOpts[type]);
     }
 
     private _updateOptions(range: Range) {
@@ -63,13 +81,5 @@ export class RangeSliderComponent implements OnInit {
             this.rangeOpt = 'thousand';
         }
         return range;
-    }
-
-    _changeValue() {
-        this.change.emit({ low: this.lowValue, high: this.highValue });
-    }
-
-    _changeRange(type: string) {
-        this._updateOptions(RangeOpts[type]);
     }
 }

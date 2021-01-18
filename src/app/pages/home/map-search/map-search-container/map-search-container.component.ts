@@ -126,7 +126,9 @@ export class MapSearchContainerComponent implements OnInit {
             if (sliderOpts) {
                 let opts = {};
                 Object.keys(sliderOpts).forEach((key) => {
-                    opts[key] = [sliderOpts[key].low, sliderOpts[key].high];
+                    if (sliderOpts[key].checked) {
+                        opts[key] = [sliderOpts[key].low, sliderOpts[key].high];
+                    }
                 });
                 params = { ...params, ...opts };
             }

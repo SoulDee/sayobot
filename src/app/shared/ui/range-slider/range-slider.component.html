@@ -1,6 +1,8 @@
-<div class="custom-slider">
+<div *ngIf="options" class="custom-slider">
+    <mat-checkbox (change)="_toggleState($event?.checked)" [checked]="_checked">
+    </mat-checkbox>
+
     <ngx-slider
-        *ngIf="options"
         [(value)]="lowValue"
         [(highValue)]="highValue"
         [options]="options"

@@ -12,8 +12,16 @@ const SEARCH_RANGE_MIN = 0;
 })
 export class RangeOptionComponent implements OnInit {
     @Input() rangeOpt: RangeSlider;
-
     @Output() change = new EventEmitter<Object>();
+
+    private _checked!: boolean;
+    get checked() {
+        return this._checked;
+    }
+    set checked(checked: boolean) {
+        this._checked = checked;
+        this.handleChange();
+    }
 
     private _low!: number;
     get low(): number {
@@ -40,9 +48,15 @@ export class RangeOptionComponent implements OnInit {
             SEARCH_SLIDER_KEY,
             this.rangeOpt.key
         );
-
+        this._checked = sliderOpt ? sliderOpt.checked : true;
         this.low = sliderOpt ? sliderOpt.low : this.rangeOpt.minDef;
         this.high = sliderOpt ? sliderOpt.high : this.rangeOpt.maxDef;
+    }
+
+    _handleRangeChange(rangeItem: RangeItem) {
+        this.low = rangeItem.low;
+        this.high = rangeItem.high;
+        this.checked = rangeItem.checked;
     }
 
     private getLimit(n: number) {
@@ -65,6 +79,7 @@ export class RangeOptionComponent implements OnInit {
         return {
             low: Math.min(this.low, this.high),
             high: Math.max(this.low, this.high),
+            checked: this.checked,
         };
     }
 }

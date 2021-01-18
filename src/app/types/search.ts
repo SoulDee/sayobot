@@ -35,4 +35,5 @@ export interface RangeSlider {
 export interface RangeItem {
     low: number;
     high: number;
+    checked: boolean;
 }

@@ -6,7 +6,8 @@
         <sayo-range-slider
             [low]="low"
             [high]="high"
-            (change)="low = $event.low; high = $event.high"
+            [checked]="checked"
+            (change)="_handleRangeChange($event)"
         ></sayo-range-slider>
     </div>
 </div>
