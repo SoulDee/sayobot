@@ -54,7 +54,6 @@ export class MapSearchContainerComponent implements OnInit {
             this.offsetStack.push(res.endid);
             this.results = res.data;
             this.loading = false;
-            this.keyword = '';
         });
     }
 
@@ -67,7 +66,6 @@ export class MapSearchContainerComponent implements OnInit {
                         panelClass: 'common-dialog',
                         data: { id: res.sid, content: res },
                     });
-                    this.keyword = '';
                 } else {
                     this.getMapList();
                 }
