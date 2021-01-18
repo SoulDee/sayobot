@@ -1,0 +1,22 @@
+<div class="category-container">
+    <div class="category-title">
+        {{ categoryList?.title | translate }}
+    </div>
+    <div class="opts-container">
+        <mat-checkbox
+            (change)="_masterToggoe($event?.checked)"
+            [checked]="isAllSelected"
+            [indeterminate]="indeterminate"
+            >全部
+        </mat-checkbox>
+
+        <ng-container *ngFor="let ins of categoryList?.options">
+            <mat-checkbox
+                (click)="$event.stopPropagation()"
+                (change)="_handleInsChange($event?.checked, ins?.key)"
+                [checked]="selected.has(ins?.key)"
+                >{{ ins?.title | translate }}
+            </mat-checkbox>
+        </ng-container>
+    </div>
+</div>

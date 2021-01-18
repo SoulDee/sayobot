@@ -1,0 +1,13 @@
+.category-container {
+    display: flex;
+    margin-bottom: 1rem;
+}
+.category-title {
+    width: 100px;
+}
+.opts-container {
+    flex: 1;
+}
+mat-checkbox {
+    margin-right: 1rem;
+}
