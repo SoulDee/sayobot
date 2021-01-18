@@ -3,18 +3,15 @@ import { SEARCH_SLIDER_KEY } from '@app/core/config';
 import { StorageService } from '@app/core/service/storage.service';
 import { RangeItem, RangeSlider } from '@app/types';
 
+const SEARCH_RANGE_MAX = 1000;
+const SEARCH_RANGE_MIN = 0;
 @Component({
     selector: 'range-option',
     templateUrl: './range-option.component.html',
     styleUrls: ['./range-option.component.scss'],
 })
 export class RangeOptionComponent implements OnInit {
-    @Input() rangeOpt: RangeSlider = {
-        title: 'Start',
-        key: 'start',
-        min: 0,
-        max: 10,
-    };
+    @Input() rangeOpt: RangeSlider;
 
     @Output() change = new EventEmitter<Object>();
 
@@ -44,15 +41,15 @@ export class RangeOptionComponent implements OnInit {
             this.rangeOpt.key
         );
 
-        this.low = sliderOpt ? sliderOpt.low : 0;
-        this.high = sliderOpt ? sliderOpt.high : 10;
+        this.low = sliderOpt ? sliderOpt.low : this.rangeOpt.minDef;
+        this.high = sliderOpt ? sliderOpt.high : this.rangeOpt.maxDef;
     }
 
     private getLimit(n: number) {
-        if (n <= this.rangeOpt.min) {
-            return this.rangeOpt.min;
-        } else if (n >= this.rangeOpt.max) {
-            return this.rangeOpt.max;
+        if (n <= SEARCH_RANGE_MIN) {
+            return SEARCH_RANGE_MIN;
+        } else if (n >= SEARCH_RANGE_MAX) {
+            return SEARCH_RANGE_MAX;
         } else {
             return n;
         }

@@ -1,31 +1,19 @@
 import { Options } from '@angular-slider/ngx-slider';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+type Level = 'ten' | 'hundred' | 'thousand';
 interface Range {
     low: number;
     high: number;
 }
 
 const RangeOpts: { [key: string]: Range } = {
-    ten: {
-        low: 0,
-        high: 10,
-    },
-    hundred: {
-        low: 0,
-        high: 100,
-    },
-    thousand: {
-        low: 0,
-        high: 1000,
-    },
+    ten: { low: 0, high: 10 },
+    hundred: { low: 0, high: 100 },
+    thousand: { low: 0, high: 1000 },
 };
 
-const DefaulOpt = {
-    floor: 0,
-    ceil: 10,
-    step: 0.1,
-};
+const DefaulOpt = { floor: 0, ceil: 10, step: 0.1 };
 
 @Component({
     selector: 'sayo-range-slider',
@@ -35,6 +23,7 @@ const DefaulOpt = {
 export class RangeSliderComponent implements OnInit {
     @Input() low: number;
     @Input() high: number;
+    @Input() level: Level;
 
     @Output() change = new EventEmitter<Range>();
 
@@ -46,12 +35,15 @@ export class RangeSliderComponent implements OnInit {
     highValue = 10;
 
     ngOnInit() {
+        this.lowValue = this.low;
+        this.highValue = this.high;
+
+        console.log(this.low, this.high);
+
         setTimeout(() => {
-            this.lowValue = this.low;
-            this.highValue = this.high;
             const range = this._getRange();
             this._updateOptions(range);
-        }, 100);
+        }, 150);
     }
 
     private _updateOptions(range: Range) {

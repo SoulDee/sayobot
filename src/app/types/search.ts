@@ -24,8 +24,8 @@ export interface CategoryOptionsIns {
 export interface RangeSlider {
     title: string;
     key: string;
-    min: number;
-    max: number;
+    minDef: number;
+    maxDef: number;
 }
 
 /**
