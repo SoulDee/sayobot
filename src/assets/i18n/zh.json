@@ -98,7 +98,9 @@
             "downNotVideo": "无视频",
             "dewnMini": "mini",
             "share": "分享"
-        }
+        },
+        "radar":"雷达图",
+        "curve": "曲线图"
     },
     "other": {
         "scrollTop": "滚动到顶部",

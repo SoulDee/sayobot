@@ -1,8 +1,12 @@
 <div class="map-detail-echart">
     <div class="switch-btns">
         <mat-radio-group [(ngModel)]="chartType">
-            <mat-radio-button value="radar">雷达图</mat-radio-button>
-            <mat-radio-button value="currve">曲线图</mat-radio-button>
+            <mat-radio-button value="radar">{{
+                'mapDetail.radar' | translate
+            }}</mat-radio-button>
+            <mat-radio-button value="currve">{{
+                'mapDetail.curve' | translate
+            }}</mat-radio-button>
         </mat-radio-group>
     </div>
 

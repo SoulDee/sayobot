@@ -98,7 +98,9 @@
             "downNotVideo": "ビデオなし",
             "dewnMini": "ミニ",
             "share": "シェアする"
-        }
+        },
+        "radar":"レーダーチャート",
+        "curve": "曲線グラフ"
     },
     "other": {
         "scrollTop": "トップにスクロールします",
