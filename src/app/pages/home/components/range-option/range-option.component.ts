@@ -48,7 +48,7 @@ export class RangeOptionComponent implements OnInit {
             SEARCH_SLIDER_KEY,
             this.rangeOpt.key
         );
-        this._checked = sliderOpt ? sliderOpt.checked : true;
+        this._checked = sliderOpt ? sliderOpt.checked : false;
         this.low = sliderOpt ? sliderOpt.low : this.rangeOpt.minDef;
         this.high = sliderOpt ? sliderOpt.high : this.rangeOpt.maxDef;
     }

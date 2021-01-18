@@ -24,14 +24,14 @@ const DefaulOpt = { floor: 0, ceil: 10, step: 0.1 };
 export class RangeSliderComponent implements OnInit {
     @Input() low: number;
     @Input() high: number;
-    @Input() checked: boolean = true;
+    @Input() checked: boolean = false;
     @Input() level: Level;
 
     @Output() change = new EventEmitter<RangeItem>();
 
     rangeOpt = 'ten';
     options: Options;
-    _checked = true;
+    _checked = false;
     lowValue = 0;
     highValue = 10;
 
@@ -48,20 +48,25 @@ export class RangeSliderComponent implements OnInit {
 
     _toggleState(checked: boolean) {
         this._checked = checked;
-        this._changeValue();
+        this._updateStorage();
     }
 
     _changeValue() {
+        this._checked = true;
+        this._updateStorage();
+    }
+
+    _changeRange(type: string) {
+        this._updateOptions(RangeOpts[type]);
+    }
+
+    private _updateStorage() {
         const rangeItem = {
             low: this.lowValue,
             high: this.highValue,
             checked: this._checked,
         };
         this.change.emit(rangeItem);
-    }
-
-    _changeRange(type: string) {
-        this._updateOptions(RangeOpts[type]);
     }
 
     private _updateOptions(range: Range) {
