@@ -47,12 +47,18 @@
     position: relative;
     margin-top: 3rem;
 
+    &:hover {
+        .icon-close {
+            display: block;
+        }
+    }
+
     .box {
         width: 100%;
         border: 1px solid #c5c5c5;
         outline: none;
         border-radius: 5px;
-        padding: 0 2rem;
+        padding: 0 6rem 0 1rem;
         height: 40px;
         line-height: 40px;
         font-size: 12px;
@@ -63,11 +69,23 @@
     }
 
     .icon-options {
-        left: 6px;
+        right: 8px;
     }
 
     .icon-search {
-        right: 6px;
+        right: 34px;
+    }
+
+    .icon-close {
+        display: none;
+        right: 66px;
+        height: 1rem;
+        width: 1rem;
+        font-size: 1rem;
+        opacity: 0.7;
+        &:hover {
+            opacity: 1;
+        }
     }
 }
 

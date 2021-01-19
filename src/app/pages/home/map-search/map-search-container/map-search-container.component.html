@@ -2,13 +2,6 @@
     <ng-content></ng-content>
 
     <div class="search-box-container">
-        <mat-icon
-            class="icon-m icon-options ab-center-y"
-            (click)="openAdvanceOptions()"
-            matTooltip="{{ 'searchCtx.box.optTip' | translate }}"
-        >
-            menu</mat-icon
-        >
         <input
             class="box"
             placeholder="{{ 'searchCtx.placeholder' | translate }}"
@@ -16,10 +9,20 @@
             (keyup.enter)="search(searchBox.value)"
             [(ngModel)]="keyword"
         />
+        <mat-icon class="icon-m icon-close ab-center-y" (click)="keyword = ''"
+            >close</mat-icon
+        >
         <mat-icon
             class="icon-m icon-search ab-center-y"
             (click)="search(searchBox.value)"
             >search</mat-icon
+        >
+        <mat-icon
+            class="icon-m icon-options ab-center-y"
+            (click)="openAdvanceOptions()"
+            matTooltip="{{ 'searchCtx.box.optTip' | translate }}"
+        >
+            menu</mat-icon
         >
     </div>
 
