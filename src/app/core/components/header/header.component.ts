@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { language } from '@app/core/config';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
+import { SEARCH_SLIDER_KEY, SEARCH_CHECKED_KEY } from '@core/config';
 
 @Component({
     selector: 'app-header',
@@ -20,6 +21,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        // 每次刷新页面的话要清空设置项缓存项
+        localStorage.removeItem(SEARCH_CHECKED_KEY);
+        localStorage.removeItem(SEARCH_SLIDER_KEY);
+
         this.language = language;
 
         if (localStorage.getItem('language')) {
