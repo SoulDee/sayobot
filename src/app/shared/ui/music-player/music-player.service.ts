@@ -39,8 +39,9 @@ export class MusicPlayerService {
         if (!isHas) {
             this.playerList = [...this.playerList, ins];
             this.playerList$.next(this.playerList);
-            this.select(ins);
         }
+
+        this.select(ins);
     }
 
     remove(ins: MusicInstance) {
