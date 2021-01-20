@@ -22,7 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
                     <router-outlet></router-outlet>
                 </main>
                 <app-footer></app-footer>
-                <music-box></music-box>
+                <sayo-music-player></sayo-music-player>
                 <scroll-top></scroll-top>
                 <mat-icon
                     class="global-icon mseeage-icon"

@@ -1,0 +1,47 @@
+<div class="player-wrapper" cdkDrag cdkDragBoundary="html">
+    <div class="bg-wrapper">
+        <ng-container *ngIf="_current; else empty">
+            <img
+                draggable="false"
+                class="picture"
+                [src]="_current?.bg"
+                [alt]="_current?.title"
+                [title]="_current?.title"
+            />
+        </ng-container>
+
+        <ng-template #empty> No Select Music! </ng-template>
+    </div>
+    <mat-icon class="action prev" (click)="prev()">skip_previous</mat-icon>
+
+    <mat-icon *ngIf="!isPlay" class="action play" (click)="play()">
+        play_arrow
+    </mat-icon>
+    <mat-icon *ngIf="isPlay" class="action pause" (click)="pause()"
+        >pause</mat-icon
+    >
+
+    <mat-icon class="action next" (click)="next()">skip_next</mat-icon>
+
+    <div class="contorls">
+        <mat-icon class="mini">minimize</mat-icon>
+        <mat-icon (click)="isOpenQueue = !isOpenQueue">list</mat-icon>
+    </div>
+
+    <ng-container *ngIf="isOpenQueue">
+        <div class="play-list-wrapper">
+            <div
+                *ngFor="
+                    let ins of _playList;
+                    let index = index;
+                    trackBy: trackByFn
+                "
+                class="play-instance"
+                [class.active]="ins.sid === _current?.sid"
+                (dblclick)="selectAndPlay(ins, index)"
+            >
+                {{ ins.title }}
+            </div>
+        </div>
+    </ng-container>
+</div>

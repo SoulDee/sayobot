@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RangeSliderModule } from './range-slider/range-slider.module';
+import { MusicPlayerModule } from './music-player/music-player.module';
 
 const DEPENDEN_LIST = [
     CommonModule,
@@ -17,7 +18,7 @@ const DEPENDEN_LIST = [
     MatTooltipModule,
 ];
 
-const UI = [...DEPENDEN_LIST, RangeSliderModule];
+const UI = [...DEPENDEN_LIST, RangeSliderModule, MusicPlayerModule];
 
 const COMPONENTS = [ScrollTopComponent, LoadingComponent, MusicBoxComponent];
 

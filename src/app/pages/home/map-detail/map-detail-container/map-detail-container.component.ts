@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PlayMusicService, MusicItem } from '@app/core/service';
 import { downloadFile } from '@app/utils';
-import { MapSidDetail, MapBidDetail, Approved } from '@app/shared/models';
+import { MapSidDetail, MapBidDetail } from '@app/shared/models';
 import { Clipboard } from '@angular/cdk/clipboard';
 
 // TODO 考虑将 level tags info 使用更好的写法来取消拆分

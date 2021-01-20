@@ -6,10 +6,11 @@ import {
 } from '@angular/core';
 import { PreMap, Approved, MapSidDetail } from '@app/shared/models';
 import { downloadFile } from '@app/utils';
-import { PlayMusicService, MusicItem, MapService } from '@app/core/service';
+import { MapService } from '@app/core/service';
 import { MatDialog } from '@angular/material/dialog';
 import { MapDetailContainerComponent } from '@pages/home/map-detail/map-detail-container';
 import { MODES_CONFIG } from './modes.meta';
+import { MusicPlayerService } from '@app/shared/ui/music-player/music-player.service';
 
 @Component({
     selector: 'map-search-result-item',
@@ -21,7 +22,7 @@ export class MapSearchResultItemComponent implements OnInit {
     @Input() map: PreMap;
 
     constructor(
-        private musicBox: PlayMusicService,
+        private player: MusicPlayerService,
         private dialog: MatDialog,
         private mapServe: MapService
     ) {}
@@ -52,12 +53,13 @@ export class MapSearchResultItemComponent implements OnInit {
     }
 
     addToMusicQueue(): void {
-        this.musicBox.switchAndPlay(
-            new MusicItem({
-                title: this.map.title,
-                id: this.map.sid,
-            })
-        );
+        const ins = {
+            title: this.map.title,
+            sid: this.map.sid,
+            url: `https://dl.sayobot.cn/beatmaps/files/${this.map.sid}/audio.mp3`,
+            bg: `https://a.sayobot.cn/beatmaps/${this.map.sid}/covers/cover.webp?0`,
+        };
+        this.player.add(ins);
     }
 
     openWithDetail() {
