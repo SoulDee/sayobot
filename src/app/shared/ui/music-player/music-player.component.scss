@@ -34,11 +34,11 @@ mat-icon {
         right: 5px;
         top: -20px;
         mat-icon {
-            width: 12px;
-            font-size: 12px;
-            height: 12px;
+            width: 1rem;
+            font-size: 1rem;
+            height: 1rem;
             &.mini {
-                transform: translateY(-4px);
+                transform: translateY(-5px);
             }
         }
     }
@@ -109,7 +109,7 @@ mat-icon {
         $wrapper-max-size: 400px;
         overflow: auto;
         position: absolute;
-        top: 120%;
+        top: 135%;
         width: 100%;
         max-height: $wrapper-max-size;
         background: rgba(0, 0, 0, 0.7);
@@ -134,8 +134,20 @@ mat-icon {
             width: 100%;
             padding: 0.5rem;
             font-size: 14px;
+            &:hover {
+                .delete {
+                    opacity: 1;
+                }
+            }
             &.active {
                 color: #ff4081;
+            }
+            .delete {
+                opacity: 0;
+                font-size: 14px;
+                color: #fff;
+                width: 14px;
+                height: 14px;
             }
         }
     }

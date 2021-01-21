@@ -43,6 +43,9 @@
                     (dblclick)="selectAndPlay(ins, index)"
                 >
                     {{ ins.title }}
+                    <mat-icon class="delete" (click)="remoteIns(ins, index)"
+                        >close</mat-icon
+                    >
                 </div>
             </div>
         </ng-container>

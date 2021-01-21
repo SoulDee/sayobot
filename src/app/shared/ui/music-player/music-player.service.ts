@@ -1,5 +1,5 @@
-import { Injectable, NgZone } from '@angular/core';
-import { fromEvent, ReplaySubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
 import { MusicInstance } from './music-player.model';
 @Injectable({
     providedIn: 'root',
@@ -13,23 +13,13 @@ export class MusicPlayerService {
     instance$ = new ReplaySubject<MusicInstance>(1);
     isPlay$ = new ReplaySubject<boolean>(1);
 
-    constructor(private _ngZone: NgZone) {
+    constructor() {
         this._player.preload = 'auto';
     }
 
     play() {
-        const subsriotion = fromEvent(this._player, 'canplaythrough').subscribe(
-            (_) => {
-                this._player.play();
-                this.isPlay$.next(true);
-
-                this._ngZone.runOutsideAngular(() => {
-                    setTimeout(() => {
-                        subsriotion.unsubscribe();
-                    }, 100);
-                });
-            }
-        );
+        this._player.play();
+        this.isPlay$.next(true);
     }
 
     pause() {
@@ -44,13 +34,12 @@ export class MusicPlayerService {
     }
 
     add(ins: MusicInstance) {
+        this.select(ins);
         const isHas = this.playerList.find((item) => item.sid === ins.sid);
         if (!isHas) {
             this.playerList = [...this.playerList, ins];
             this.playerList$.next(this.playerList);
         }
-
-        this.select(ins);
     }
 
     remove(ins: MusicInstance) {

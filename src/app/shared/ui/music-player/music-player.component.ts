@@ -24,11 +24,15 @@ export class MusicPlayerComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.player.instance$.subscribe((res) => (this._current = res));
         this.player.playerList$.subscribe((res) => {
             this._playList = res;
-            this.currentIndex = res.length - 1;
+            const index = this._current
+                ? res.findIndex((ins) => ins.sid === this._current.sid)
+                : 0;
+            this.currentIndex = index === -1 ? 0 : index;
         });
-        this.player.instance$.subscribe((res) => (this._current = res));
+
         this.player.isPlay$.subscribe((res) => (this.isPlay = res));
 
         fromEvent(this.player._player, 'ended').subscribe(() => this.next());
@@ -47,6 +51,15 @@ export class MusicPlayerComponent implements OnInit {
     selectAndPlay(ins: MusicInstance, index: number) {
         this.currentIndex = index;
         this.player.select(ins);
+    }
+
+    remoteIns(ins: MusicInstance) {
+        if (ins === this._current) {
+            this.player.pause();
+            this.player.instance$.next(null);
+        }
+
+        this.player.remove(ins);
     }
 
     prev() {
