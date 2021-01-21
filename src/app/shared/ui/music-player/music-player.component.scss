@@ -12,7 +12,7 @@ mat-icon {
     cursor: pointer;
 }
 
-.player-wrapper {
+.player-wrapper.mode-mini {
     position: fixed;
     z-index: 9999;
     right: 40px;
@@ -138,5 +138,28 @@ mat-icon {
                 color: #ff4081;
             }
         }
+    }
+}
+
+.mode-icon {
+    position: fixed;
+    right: 23px;
+    bottom: 158px;
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+    z-index: 999;
+
+    &.spin {
+        animation: spin 5s linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

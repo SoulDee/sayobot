@@ -3,6 +3,7 @@ import { fromEvent } from 'rxjs';
 import { MusicInstance } from './music-player.model';
 import { MusicPlayerService } from './music-player.service';
 
+type PlayerMode = 'icon' | 'mini';
 @Component({
     selector: 'sayo-music-player',
     templateUrl: './music-player.component.html',
@@ -15,7 +16,12 @@ export class MusicPlayerComponent implements OnInit {
     isOpenQueue: boolean = false;
     isPlay: boolean = false;
 
-    constructor(public player: MusicPlayerService) {}
+    mode: PlayerMode;
+
+    constructor(public player: MusicPlayerService) {
+        const mode = localStorage.getItem('playerMode') as PlayerMode;
+        this.mode = mode || 'mini';
+    }
 
     ngOnInit(): void {
         this.player.playerList$.subscribe((res) => {
@@ -61,6 +67,11 @@ export class MusicPlayerComponent implements OnInit {
         }
 
         this.selectAndPlay(this.currentInstance, this.currentIndex);
+    }
+
+    changePlayerMode(mode: string) {
+        this.mode = mode as PlayerMode;
+        localStorage.setItem('playerMode', mode);
     }
 
     trackByFn(_index: number, ins: MusicInstance) {
