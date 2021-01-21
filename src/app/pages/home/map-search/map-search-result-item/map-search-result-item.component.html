@@ -57,9 +57,9 @@
         </div>
         <div class="action">
             <mat-icon
-                (click)="addToMusicQueue()"
-                matTooltip="{{ 'searchCtx.panel.add2music' | translate }}"
-                >queue
+                (click)="tryListen()"
+                matTooltip="{{ 'searchCtx.panel.tryListen' | translate }}"
+                >play_arrow
             </mat-icon>
             <mat-icon
                 (click)="download()"

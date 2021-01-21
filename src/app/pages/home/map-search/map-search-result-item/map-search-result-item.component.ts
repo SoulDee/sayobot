@@ -52,14 +52,15 @@ export class MapSearchResultItemComponent implements OnInit {
         );
     }
 
-    addToMusicQueue(): void {
+    // 试听歌曲
+    tryListen() {
         const ins = {
             title: this.map.title,
             sid: this.map.sid,
-            url: `https://dl.sayobot.cn/beatmaps/files/${this.map.sid}/audio.mp3`,
+            url: `https://cdnx.sayobot.cn:25225/preview/${this.map.sid}.mp3`,
             bg: `https://a.sayobot.cn/beatmaps/${this.map.sid}/covers/cover.webp?0`,
         };
-        this.player.add(ins);
+        this.player.select(ins);
     }
 
     openWithDetail() {

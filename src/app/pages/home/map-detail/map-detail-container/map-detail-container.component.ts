@@ -16,7 +16,7 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
     BASE_URL = 'https://txy1.sayobot.cn/beatmaps/download/';
     mapDetail: MapSidDetail; // 铺面详情
     imgUrl: string; // 图片链接
-    parttime: number; // 试听剩余时间
+
     detailInfo: MapBidDetail;
 
     // 下载状态
@@ -75,28 +75,14 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
     }
 
     // 试听歌曲
-    playPart() {
+    play() {
         const ins = {
             title: this.mapDetail.title,
             sid: this.mapDetail.sid,
-            url: `https://cdnx.sayobot.cn:25225/preview/${this.mapDetail.sid}.mp3`,
+            url: `https://dl.sayobot.cn/beatmaps/files/${this.mapDetail.sid}/${this.detailInfo.audio}`,
             bg: `https://a.sayobot.cn/beatmaps/${this.mapDetail.sid}/covers/cover.webp?0`,
         };
-        this.player.select(ins);
-
-        this.parttime =
-            Math.floor(this.player._player.duration) -
-            Math.floor(this.player._player.currentTime);
-        this.musicTimer = setInterval(() => {
-            this.parttime =
-                Math.floor(this.player._player.duration) -
-                Math.floor(this.player._player.currentTime) -
-                1;
-            if (this.parttime === 0) {
-                clearInterval(this.musicTimer);
-                this.musicTimer = null;
-            }
-        }, 1000);
+        this.player.add(ins);
     }
 
     // 将当前铺面复制到剪切板

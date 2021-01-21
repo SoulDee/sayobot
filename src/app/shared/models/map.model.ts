@@ -166,6 +166,7 @@ export interface MapSidDetail {
  * }
  */
 export interface MapBidDetail {
+    audio: string;
     bid: number;
     mode: number;
     version: string;
@@ -275,5 +276,5 @@ export enum Approved {
     ranked = 1,
     approved = 2,
     qualified = 3,
-    loved = 4
+    loved = 4,
 }

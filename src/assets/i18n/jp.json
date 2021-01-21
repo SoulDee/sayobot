@@ -40,7 +40,7 @@
             "playcountTip": "ゲーム数",
             "favoriteTip": "お気に入り",
             "lookTip": "詳細を見る",
-            "add2music": "音楽プレイリストに追加",
+            "tryListen": "試聴",
             "download": "ローカルにダウンロード"
         },
         "opts": {
@@ -92,7 +92,7 @@
             "artist": "芸術家"
         },
         "action": {
-            "preListen": "オーディション",
+            "play": "音楽を聴く",
             "preview": "プレビュー",
             "down": "ダウンロード",
             "downNotVideo": "ビデオなし",

@@ -40,7 +40,7 @@
             "playcountTip": "Number of games",
             "favoriteTip": "Favorites",
             "lookTip": "See details",
-            "add2music": "Add to music playlist",
+            "tryListen": "Try it",
             "download": "Download to local"
         },
         "opts": {
@@ -92,7 +92,7 @@
             "artist": "Artist"
         },
         "action": {
-            "preListen": "Part",
+            "play": "Play",
             "preview": "Preview",
             "down": "Download",
             "downNotVideo": "Not Video",

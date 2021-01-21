@@ -22,21 +22,10 @@
         <button
             mat-raised-button
             color="accent"
-            *ngIf="musicTimer"
-            disabled
+            (click)="play()"
             class="flex-center"
         >
-            <span *ngIf="parttime; else downLoading">{{ parttime }}s</span>
-        </button>
-
-        <button
-            mat-raised-button
-            color="accent"
-            *ngIf="!musicTimer"
-            (click)="playPart()"
-            class="flex-center"
-        >
-            {{ 'mapDetail.action.preListen' | translate }}
+            {{ 'mapDetail.action.play' | translate }}
         </button>
 
         <a mat-raised-button color="accent" [href]="link" target="_blank">

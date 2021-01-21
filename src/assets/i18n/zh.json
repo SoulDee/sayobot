@@ -40,7 +40,7 @@
             "playcountTip": "游玩次数",
             "favoriteTip": "收藏次数",
             "lookTip": "查看详情",
-            "add2music": "添加到音乐播放列表",
+            "tryListen": "试听",
             "download": "下载到本地"
         },
         "opts": {
@@ -92,7 +92,7 @@
             "artist": "艺术家"
         },
         "action": {
-            "preListen": "试听",
+            "play": "播放",
             "preview": "预览铺面",
             "down": "下载",
             "downNotVideo": "无视频",
