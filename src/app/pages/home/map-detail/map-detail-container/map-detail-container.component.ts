@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PlayMusicService, MusicItem } from '@app/core/service';
 import { downloadFile } from '@app/utils';
 import { MapSidDetail, MapBidDetail } from '@app/shared/models';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { MusicPlayerService } from '@app/shared/ui/music-player/music-player.service';
 
 // TODO 考虑将 level tags info 使用更好的写法来取消拆分
 @Component({
@@ -30,7 +30,7 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private musicBox: PlayMusicService,
+        private player: MusicPlayerService,
         private snackBar: MatSnackBar,
         private clipboard: Clipboard
     ) {}
@@ -76,19 +76,21 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
 
     // 试听歌曲
     playPart() {
-        this.musicBox.switchAndPlay(
-            new MusicItem({
-                title: this.mapDetail.title,
-                id: this.mapDetail.sid,
-            })
-        );
+        const ins = {
+            title: this.mapDetail.title,
+            sid: this.mapDetail.sid,
+            url: `https://cdnx.sayobot.cn:25225/preview/${this.mapDetail.sid}.mp3`,
+            bg: `https://a.sayobot.cn/beatmaps/${this.mapDetail.sid}/covers/cover.webp?0`,
+        };
+        this.player.select(ins);
+
         this.parttime =
-            Math.floor(this.musicBox.musicEl.duration) -
-            Math.floor(this.musicBox.musicEl.currentTime);
+            Math.floor(this.player._player.duration) -
+            Math.floor(this.player._player.currentTime);
         this.musicTimer = setInterval(() => {
             this.parttime =
-                Math.floor(this.musicBox.musicEl.duration) -
-                Math.floor(this.musicBox.musicEl.currentTime) -
+                Math.floor(this.player._player.duration) -
+                Math.floor(this.player._player.currentTime) -
                 1;
             if (this.parttime === 0) {
                 clearInterval(this.musicTimer);
