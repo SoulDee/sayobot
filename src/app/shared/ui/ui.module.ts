@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ScrollTopComponent } from './scroll-top.component';
 import { LoadingComponent } from './loading.component';
-import { MusicBoxComponent } from './music-box/music-box.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
@@ -20,7 +19,7 @@ const DEPENDEN_LIST = [
 
 const UI = [...DEPENDEN_LIST, RangeSliderModule, MusicPlayerModule];
 
-const COMPONENTS = [ScrollTopComponent, LoadingComponent, MusicBoxComponent];
+const COMPONENTS = [ScrollTopComponent, LoadingComponent];
 
 @NgModule({
     declarations: COMPONENTS,
