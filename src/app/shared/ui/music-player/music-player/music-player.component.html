@@ -21,14 +21,16 @@
             <ng-template #empty> No Select Music! </ng-template>
         </div>
 
-        <mat-icon class="action prev" (click)="prev()">skip_previous</mat-icon>
+        <mat-icon class="action prev" matTooltip="ctrl + ←" (click)="prev()"
+            >skip_previous</mat-icon
+        >
         <mat-icon *ngIf="!isPlay" class="action play" (click)="play()">
             play_arrow
         </mat-icon>
         <mat-icon *ngIf="isPlay" class="action pause" (click)="pause()">
             pause
         </mat-icon>
-        <mat-icon class="action next" (click)="next()">skip_next</mat-icon>
+        <mat-icon class="action next" matTooltip="ctrl + →" (click)="next()">skip_next</mat-icon>
 
         <player-progress></player-progress>
         <player-volume-control></player-volume-control>

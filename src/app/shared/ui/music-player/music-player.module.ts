@@ -7,15 +7,21 @@ import { PlayerVolumeControlComponent } from './player-volume-control/player-vol
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import { PlayerProgressComponent } from './player-progress/player-progress.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-    declarations: [MusicPlayerComponent, PlayerVolumeControlComponent, PlayerProgressComponent],
+    declarations: [
+        MusicPlayerComponent,
+        PlayerVolumeControlComponent,
+        PlayerProgressComponent,
+    ],
     imports: [
         CommonModule,
         FormsModule,
         MatIconModule,
         DragDropModule,
         MatSliderModule,
+        MatTooltipModule,
     ],
     exports: [MusicPlayerComponent],
 })

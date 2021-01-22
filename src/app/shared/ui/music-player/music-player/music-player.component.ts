@@ -26,6 +26,21 @@ export class MusicPlayerComponent implements OnInit {
     ) {
         const mode = storage.getChild<PlayerMode>(PLAYER_KEY, 'mode');
         this.mode = mode || 'mini';
+
+        fromEvent(document.body, 'keyup').subscribe((res: KeyboardEvent) => {
+            if (res.ctrlKey) {
+                switch (res.key) {
+                    case 'ArrowLeft':
+                        this.prev();
+                        break;
+                    case 'ArrowRight':
+                        this.next();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     ngOnInit(): void {
