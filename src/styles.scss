@@ -17,12 +17,21 @@ main {
 
 $primary: #ff4081;
 
-.volume-wrapper {
+.mini-slider {
     .mat-slider-horizontal {
         height: 32px;
     }
     .mat-slider-horizontal .mat-slider-wrapper {
         background-color: #ccc;
         top: 15px;
+    }
+}
+
+.no-thumb-slider {
+    .mat-slider-track-wrapper {
+        background-color: #000;
+    }
+    .mat-slider-thumb {
+        display: none;
     }
 }

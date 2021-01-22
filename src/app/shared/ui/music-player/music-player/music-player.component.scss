@@ -171,6 +171,18 @@ mat-icon {
     }
 }
 
+player-volume-control {
+    position: absolute;
+    top: 40px;
+    right: 18px;
+}
+
+player-progress {
+    position: absolute;
+    top: 43px;
+    width: 260px;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0);

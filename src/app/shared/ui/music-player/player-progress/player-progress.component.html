@@ -1,0 +1,14 @@
+<div class="player-progress-wrapper mini-slider no-thumb-slider">
+    <div class="progress-timestamp">
+        {{ time }}
+    </div>
+    <mat-slider
+        [disabled]="player._player.readyState !== 4"
+        [max]="max"
+        [min]="0"
+        [step]="1"
+        [(ngModel)]="value"
+        (change)="setCurrentTime()"
+    >
+    </mat-slider>
+</div>

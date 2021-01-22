@@ -1,0 +1,14 @@
+.player-progress-wrapper {
+    display: flex;
+    align-items: center;
+
+    .progress-timestamp {
+        width: 40px;
+        font-size: 12px;
+        text-align: center;
+        transform: translate(5px,-3px);
+    }
+    mat-slider {
+        flex: 1;
+    }
+}

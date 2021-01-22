@@ -6,9 +6,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PlayerVolumeControlComponent } from './player-volume-control/player-volume-control.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
+import { PlayerProgressComponent } from './player-progress/player-progress.component';
 
 @NgModule({
-    declarations: [MusicPlayerComponent, PlayerVolumeControlComponent],
+    declarations: [MusicPlayerComponent, PlayerVolumeControlComponent, PlayerProgressComponent],
     imports: [
         CommonModule,
         FormsModule,
