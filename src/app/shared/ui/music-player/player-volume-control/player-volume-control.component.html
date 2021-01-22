@@ -1,0 +1,14 @@
+<div class="volume-wrapper">
+    <div class="slider-wrapper">
+        <mat-slider
+            [max]="100"
+            [min]="0"
+            [step]="1"
+            [invert]="true"
+            [(ngModel)]="value"
+            (change)="setVolume()"
+        ></mat-slider>
+    </div>
+    <mat-icon *ngIf="value !== 0" (click)="setQuiet()">mic</mat-icon>
+    <mat-icon *ngIf="value === 0" (click)="openVolume()">mic_off</mat-icon>
+</div>

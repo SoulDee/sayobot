@@ -53,4 +53,12 @@ export class MusicPlayerService {
         this.playerList = [];
         this.playerList$.next(this.playerList);
     }
+
+    setVolume(n: number) {
+        this._player.volume = n;
+    }
+
+    getVolume() {
+        return this._player.volume;
+    }
 }

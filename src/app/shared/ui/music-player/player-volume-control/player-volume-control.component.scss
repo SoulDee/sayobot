@@ -1,0 +1,38 @@
+.volume-wrapper {
+    position: absolute;
+    top: 34px;
+    display: flex;
+    align-items: center;
+    right: 18px;
+    transition: all 0.3s ease-in-out;
+
+    mat-icon {
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .slider-wrapper {
+        width: 0px;
+        visibility: hidden;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &:hover {
+        background: #000;
+        border-radius: 2rem;
+        padding: 0 1rem;
+
+        mat-icon {
+            color: #fff;
+        }
+
+        .slider-wrapper {
+            width: 132px;
+            visibility: visible;
+        }
+    }
+}

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { PLAYER_KEY } from '@app/core/config';
+import { StorageService } from '@app/core/service/storage.service';
 import { fromEvent } from 'rxjs';
-import { MusicInstance } from './music-player.model';
-import { MusicPlayerService } from './music-player.service';
+import { MusicInstance } from '../music-player.model';
+import { MusicPlayerService } from '../music-player.service';
 
 type PlayerMode = 'icon' | 'mini';
 @Component({
@@ -18,8 +20,11 @@ export class MusicPlayerComponent implements OnInit {
 
     mode: PlayerMode;
 
-    constructor(public player: MusicPlayerService) {
-        const mode = localStorage.getItem('playerMode') as PlayerMode;
+    constructor(
+        private player: MusicPlayerService,
+        private storage: StorageService
+    ) {
+        const mode = storage.getChild<PlayerMode>(PLAYER_KEY, 'mode');
         this.mode = mode || 'mini';
     }
 
@@ -84,7 +89,7 @@ export class MusicPlayerComponent implements OnInit {
 
     changePlayerMode(mode: string) {
         this.mode = mode as PlayerMode;
-        localStorage.setItem('playerMode', mode);
+        this.storage.saveChild(PLAYER_KEY, 'mode', mode);
     }
 
     trackByFn(_index: number, ins: MusicInstance) {

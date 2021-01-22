@@ -1,6 +1,13 @@
 <ng-container *ngIf="mode === 'mini'">
     <div class="mode-mini player-wrapper" cdkDrag cdkDragBoundary="html">
-        <div class="bg-wrapper">
+        <div class="contorls">
+            <mat-icon class="mini" (click)="changePlayerMode('icon')">
+                minimize
+            </mat-icon>
+            <mat-icon (click)="isOpenQueue = !isOpenQueue">list</mat-icon>
+        </div>
+
+        <div class="bg-wrapper" cdkDragHandle>
             <ng-container *ngIf="_current; else empty">
                 <img
                     draggable="false"
@@ -18,17 +25,12 @@
         <mat-icon *ngIf="!isPlay" class="action play" (click)="play()">
             play_arrow
         </mat-icon>
-        <mat-icon *ngIf="isPlay" class="action pause" (click)="pause()"
-            >pause</mat-icon
-        >
+        <mat-icon *ngIf="isPlay" class="action pause" (click)="pause()">
+            pause
+        </mat-icon>
         <mat-icon class="action next" (click)="next()">skip_next</mat-icon>
 
-        <div class="contorls">
-            <mat-icon class="mini" (click)="changePlayerMode('icon')"
-                >minimize</mat-icon
-            >
-            <mat-icon (click)="isOpenQueue = !isOpenQueue">list</mat-icon>
-        </div>
+        <player-volume-control></player-volume-control>
 
         <ng-container *ngIf="isOpenQueue">
             <div class="play-list-wrapper">
