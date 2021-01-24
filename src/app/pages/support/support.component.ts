@@ -17,26 +17,22 @@ export class SupportComponent implements OnInit {
     currentLink: string;
     currentType: string = 'income_details';
 
-    loading: boolean;
+    loading: boolean = true;
 
     currentIncome: number = 0;
     currentExpense: number = 0;
 
-    constructor(private donation: DonationService) {
-        this.loading = true;
-    }
+    constructor(private donation: DonationService) {}
 
     ngOnInit() {
-        this.donation
-            .getSupperV2()
-            .subscribe((res: { data: SupportList2[] }) => {
-                const firstMonth = res.data[0];
-                this.supportList = res.data;
-                this.currentLink = firstMonth.title;
-                this.dataSource = firstMonth[this.currentType];
-                this.changeCurrentData(firstMonth);
-                this.loading = false;
-            });
+        this.donation.getSupperV2().subscribe((res) => {
+            const firstMonth = res.data[0];
+            this.supportList = res.data;
+            this.currentLink = firstMonth.title;
+            this.dataSource = firstMonth[this.currentType];
+            this.changeCurrentData(firstMonth);
+            this.loading = false;
+        });
     }
 
     changeCurrentData(data: SupportList2) {
