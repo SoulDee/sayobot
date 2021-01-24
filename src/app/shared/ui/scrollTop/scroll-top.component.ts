@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'scroll-top',
@@ -20,14 +20,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
         `,
     ],
 })
-export class ScrollTopComponent implements OnInit {
-    constructor() {}
-
-    ngOnInit() {}
-
+export class ScrollTopComponent {
     scroll() {
         window.scrollTo(0, 0);
     }
-
-    // TODO 滚动到顶部的动画
 }

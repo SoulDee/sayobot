@@ -1,12 +1,59 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+} from '@angular/core';
 import { SEARCH_CHECKED_KEY } from '@app/core/config';
 import { StorageService } from '@app/core/service/storage.service';
 import { CategoryOptions } from '@app/types';
 
 @Component({
     selector: 'category-options',
-    templateUrl: './category-options.component.html',
-    styleUrls: ['./category-options.component.scss'],
+    template: `
+        <div class="category-container">
+            <div class="category-title">
+                {{ categoryList?.title | translate }}
+            </div>
+            <div class="opts-container">
+                <mat-checkbox
+                    (change)="_masterToggoe($event?.checked)"
+                    [checked]="isAllSelected"
+                    [indeterminate]="indeterminate"
+                    >全部
+                </mat-checkbox>
+
+                <ng-container *ngFor="let ins of categoryList?.options">
+                    <mat-checkbox
+                        (click)="$event.stopPropagation()"
+                        (change)="_handleInsChange($event?.checked, ins?.key)"
+                        [checked]="selected.has(ins?.key)"
+                        >{{ ins?.title | translate }}
+                    </mat-checkbox>
+                </ng-container>
+            </div>
+        </div>
+    `,
+    styles: [
+        `
+            .category-container {
+                display: flex;
+                margin-bottom: 1rem;
+            }
+            .category-title {
+                width: 100px;
+            }
+            .opts-container {
+                flex: 1;
+            }
+            mat-checkbox {
+                margin-right: 1rem;
+            }
+        `,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryOptionsComponent implements OnInit {
     @Input() categoryList!: CategoryOptions;

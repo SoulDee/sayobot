@@ -1,12 +1,15 @@
-<div class="difficult-table" *ngIf="bidDataList">
-    <button
-        *ngFor="let item of bidDataList"
-        matBadgePosition="after"
-        mat-raised-button
-        color="accent"
-        [matBadge]="modeTip(item)"
-        (click)="select(item)"
-    >
-        {{ item.star | number: '1.2-2' }}
-    </button>
-</div>
+<ng-container *ngIf="bidDataList">
+    <div class="difficult-table">
+        <ng-container *ngFor="let item of bidDataList">
+            <button
+                matBadgePosition="after"
+                mat-raised-button
+                color="accent"
+                [matBadge]="modeTip(item)"
+                (click)="select(item)"
+            >
+                {{ item.star | number: '1.2-2' }}
+            </button>
+        </ng-container>
+    </div>
+</ng-container>

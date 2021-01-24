@@ -1,13 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { MapBidDetail } from '@app/shared/models';
 import { radar_option, curve_option } from './models';
 
 @Component({
     selector: 'map-detail-charts',
     templateUrl: './map-detail-charts.component.html',
     styleUrls: ['./map-detail-charts.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapDetailChartsComponent implements OnInit {
-    private _mapData: any;
+export class MapDetailChartsComponent {
+    private _mapData: MapBidDetail;
+
     aim: number;
     speed: number;
     star: number;
@@ -19,51 +22,58 @@ export class MapDetailChartsComponent implements OnInit {
     chartType = 'currve';
 
     @Input()
-    set mapData(detail) {
+    set mapData(detail: MapBidDetail) {
         this._mapData = detail;
         this.update();
     }
 
-    constructor() {}
-
-    ngOnInit() {
-        this.update();
-    }
-
-    update() {
-        this.updateRadarOptionValue();
-        this.updateCurveOptionData();
-        this.setRange();
-    }
-
-    setRange() {
+    private setRange() {
         this.star = this._mapData.star;
         this.aim = this._mapData.aim;
         this.speed = this.star - this.aim;
         this.rangeValue = 100 * (this.aim / this.star);
     }
 
-    updateRadarOptionValue() {
-        const mapdata = this._mapData;
-        const data = [mapdata.AR, mapdata.CS, mapdata.HP, mapdata.OD];
+    private updateRadarOptionValue() {
+        const data = [
+            this._mapData.AR,
+            this._mapData.CS,
+            this._mapData.HP,
+            this._mapData.OD,
+        ];
         radar_option.series[0].data[0].value = data;
         this.radarOptions = { ...radar_option };
     }
 
-    updateCurveOptionData() {
-        const mapdata = this._mapData;
-        const aim = mapdata.strain_aim.split('');
-        const speed = mapdata.strain_speed.split('');
-        const total = aim.map(
-            (count, index) => Number(count) + Number(speed[index])
-        );
-
+    private updateCurveOptionData() {
+        const total = this.getTotal();
         if (total.length > 0) {
-            curve_option.series[0].data = total;
+            curve_option.series[0].data = [...total];
             this.currveOptions = { ...curve_option };
         } else {
             this.currveOptions = null;
             this.chartType = 'radar';
         }
+    }
+
+    private update() {
+        this.updateRadarOptionValue();
+        this.updateCurveOptionData();
+        this.setRange();
+    }
+
+    private getTotal() {
+        const aimArr = this._mapData.strain_aim
+            .split('')
+            .map((n: string) => Number(n));
+        const speedArr = this._mapData.strain_speed
+            .split('')
+            .map((n: string) => Number(n));
+
+        let total = [];
+        for (let i = 0; i < aimArr.length; i++) {
+            total.push(aimArr[i] + speedArr[i]);
+        }
+        return total;
     }
 }

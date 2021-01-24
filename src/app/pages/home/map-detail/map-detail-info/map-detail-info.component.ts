@@ -1,34 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Approved } from '@app/shared/models';
-import { Language, Genre } from './meta';
-
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { GENRE_META_OPTIONS, LANGUAGE_META_OPTIONS } from '@app/core/config';
+import { Approved, MapBidDetail, MapSidDetail } from '@app/shared/models';
 @Component({
     selector: 'map-detail-info',
     templateUrl: './map-detail-info.component.html',
     styleUrls: ['./map-detail-info.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapDetailInfoComponent implements OnInit {
-    @Input() detail: any;
-    @Input() info: any;
-
-    constructor() {}
-
-    ngOnInit() {}
+export class MapDetailInfoComponent {
+    @Input() detail: MapSidDetail;
+    @Input() info: MapBidDetail;
 
     getLanguage(index: string) {
-        return Language[index];
+        return LANGUAGE_META_OPTIONS[index];
     }
 
     getGenre(index: string) {
-        return Genre[index];
-    }
-
-    getDate(date: number) {
-        const dateObj = new Date(date * 1000);
-        const year = dateObj.getFullYear();
-        const mouth = dateObj.getMonth() + 1;
-        const hour = dateObj.getHours();
-        return `${year} - ${mouth} - ${hour}`;
+        return GENRE_META_OPTIONS[index];
     }
 
     get approved() {

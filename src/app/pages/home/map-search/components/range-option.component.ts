@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+} from '@angular/core';
 import { SEARCH_SLIDER_KEY } from '@app/core/config';
 import { StorageService } from '@app/core/service/storage.service';
 import { RangeItem, RangeSlider } from '@app/types';
@@ -7,8 +15,37 @@ const SEARCH_RANGE_MAX = 1000;
 const SEARCH_RANGE_MIN = 0;
 @Component({
     selector: 'range-option',
-    templateUrl: './range-option.component.html',
-    styleUrls: ['./range-option.component.scss'],
+    template: `
+        <div class="range-slider-container">
+            <div class="range-slider-title">
+                {{ rangeOpt?.title }}
+            </div>
+            <div class="range-slider-content">
+                <sayo-range-slider
+                    [low]="low"
+                    [high]="high"
+                    [checked]="checked"
+                    (change)="_handleRangeChange($event)"
+                ></sayo-range-slider>
+            </div>
+        </div>
+    `,
+    styles: [
+        `
+            .range-slider-container {
+                display: flex;
+            }
+            .range-slider-title {
+                display: flex;
+                align-items: center;
+                width: 6.25rem;
+            }
+            .range-slider-content {
+                width: 90%;
+            }
+        `,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RangeOptionComponent implements OnInit {
     @Input() rangeOpt: RangeSlider;

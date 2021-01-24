@@ -1,14 +1,21 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    AfterViewInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { language } from '@app/core/config';
-import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
+import { HelpDialogComponent } from '../help-dialog.component';
 import { SEARCH_SLIDER_KEY, SEARCH_CHECKED_KEY } from '@core/config';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     language: Array<any>;

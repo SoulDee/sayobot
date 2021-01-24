@@ -1,17 +1,23 @@
 <div class="swiper-container">
-    <div class="swiper-wrapper" (mouseover)="stop()" (mouseout)="start()">
-        <div class="swiper-slide" *ngFor="let slide of slides">
-            <div class="wrap">
-                <img
-                    src="{{ slide.img1000x150 }}"
-                    class="pic"
-                    (click)="navTo(slide.uri)"
-                />
-                <div class="link-bg one-line">
-                    {{ slide.title }}
+    <div
+        class="swiper-wrapper"
+        (mouseover)="swiper.autoplay.stop()"
+        (mouseout)="swiper.autoplay.start()"
+    >
+        <ng-container *ngFor="let slide of slides">
+            <div class="swiper-slide">
+                <div class="wrap">
+                    <img
+                        [src]="slide.img1000x150"
+                        class="pic"
+                        (click)="navTo(slide.uri)"
+                    />
+                    <div class="link-bg one-line">
+                        {{ slide.title }}
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
     </div>
     <div class="swiper-pagination"></div>
 </div>

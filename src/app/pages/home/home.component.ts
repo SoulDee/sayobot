@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     template: `
@@ -7,8 +7,4 @@ import { Component, OnInit } from '@angular/core';
         </map-search-container>
     `,
 })
-export class HomeComponent implements OnInit {
-    constructor() {}
-
-    ngOnInit() {}
-}
+export class HomeComponent {}

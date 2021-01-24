@@ -21,21 +21,24 @@
     </ng-container>
 
     <ng-container *ngIf="chartType === 'currve'">
-        <div
-            *ngIf="currveOptions; else noData"
-            echarts
-            [options]="currveOptions"
-            class="map-detail-curve-echart"
-        ></div>
+        <ng-container *ngIf="currveOptions; else noData">
+            <div
+                echarts
+                [options]="currveOptions"
+                class="map-detail-curve-echart"
+            ></div>
+        </ng-container>
 
-        <div *ngIf="currveOptions" class="progress-wrapper">
-            <mat-progress-bar mode="determinate" [value]="rangeValue">
-            </mat-progress-bar>
-            <div class="count">
-                <span>{{ aim | number: '0.0-2' }}</span>
-                <span>{{ speed | number: '0.0-2' }}</span>
+        <ng-container *ngIf="currveOptions">
+            <div class="progress-wrapper">
+                <mat-progress-bar mode="determinate" [value]="rangeValue">
+                </mat-progress-bar>
+                <div class="count">
+                    <span>{{ aim | number: '0.0-2' }}</span>
+                    <span>{{ speed | number: '0.0-2' }}</span>
+                </div>
             </div>
-        </div>
+        </ng-container>
     </ng-container>
 </div>
 

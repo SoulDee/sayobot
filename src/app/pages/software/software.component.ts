@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { downloadFile } from '@app/utils';
 import { BigPictureComponent } from './big-picture.component';
@@ -6,6 +6,7 @@ import { BigPictureComponent } from './big-picture.component';
 @Component({
     templateUrl: './software.component.html',
     styleUrls: ['./software.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SoftwareComponent {
     softwareList = [

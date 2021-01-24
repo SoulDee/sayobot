@@ -1,5 +1,13 @@
 import { Options } from '@angular-slider/ngx-slider';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+} from '@angular/core';
 import { RangeItem } from '@app/types';
 
 type Level = 'ten' | 'hundred' | 'thousand';
@@ -20,6 +28,7 @@ const DefaulOpt = { floor: 0, ceil: 10, step: 0.1 };
     selector: 'sayo-range-slider',
     templateUrl: './range-slider.component.html',
     styleUrls: ['./range-slider.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RangeSliderComponent implements OnInit {
     @Input() low: number;
@@ -35,6 +44,8 @@ export class RangeSliderComponent implements OnInit {
     lowValue = 0;
     highValue = 10;
 
+    constructor(private cdr: ChangeDetectorRef) {}
+
     ngOnInit() {
         this.lowValue = this.low;
         this.highValue = this.high;
@@ -43,6 +54,7 @@ export class RangeSliderComponent implements OnInit {
         setTimeout(() => {
             const range = this._getRange();
             this._updateOptions(range);
+            this.cdr.markForCheck();
         }, 200);
     }
 

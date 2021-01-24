@@ -1,35 +1,42 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+} from '@angular/core';
 import Swiper from 'swiper';
 import { Ad } from '@app/shared/models';
 import { AdsService } from '@app/core/service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'ads-box',
     templateUrl: './ads-box.component.html',
     styleUrls: ['./ads-box.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdsBoxComponent implements OnInit, OnDestroy {
     swiper: Swiper;
     slides: Ad[];
     timer = null;
 
-    constructor(private ads: AdsService) {}
+    destory$ = new Subject();
+
+    constructor(private ads: AdsService, private cdr: ChangeDetectorRef) {}
 
     ngOnInit() {
-        this.ads.getAds().subscribe((res) => {
-            this.slides = res.data;
-            this.timer = setTimeout(() => {
-                this.initSwiper();
-            }, 0);
-        });
-    }
-
-    start() {
-        this.swiper.autoplay.start();
-    }
-
-    stop() {
-        this.swiper.autoplay.stop();
+        this.ads
+            .getAds()
+            .pipe(takeUntil(this.destory$))
+            .subscribe((res) => {
+                this.slides = res.data;
+                this.timer = setTimeout(() => {
+                    this.initSwiper();
+                    this.cdr.markForCheck();
+                }, 0);
+            });
     }
 
     initSwiper() {
@@ -55,5 +62,7 @@ export class AdsBoxComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         clearTimeout(this.timer);
         this.timer = null;
+        this.destory$.next();
+        this.destory$.complete();
     }
 }

@@ -1,29 +1,16 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '@app/shared';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { MapSearchModule } from './map-search/map-search.module';
-import { AdsBoxComponent } from './ads-box/ads-box.component';
 import { MapDetailModule } from './map-detail/map-detail.module';
-import {
-    SearchAdvanceOptionsComponent,
-    CategoryOptionsComponent,
-    RangeOptionComponent,
-} from './components';
-
+import { AdsBoxModule } from './ads-box/ads-box.module';
 @NgModule({
-    declarations: [
-        HomeComponent,
-        AdsBoxComponent,
-        SearchAdvanceOptionsComponent,
-        CategoryOptionsComponent,
-        RangeOptionComponent,
-    ],
+    declarations: [HomeComponent],
     imports: [
-        SharedModule,
         HomeRoutingModule,
         MapSearchModule,
         MapDetailModule,
+        AdsBoxModule,
     ],
 })
 export class HomeModule {}

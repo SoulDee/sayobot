@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MapDetailContainerComponent } from '../../map-detail/map-detail-container';
 import { SEARCH_CHECKED_KEY, SEARCH_SLIDER_KEY } from '@app/core/config';
 import { SearchType, sumByArr } from '@app/types';
-import { SearchAdvanceOptionsComponent } from '../../components';
+import { SearchAdvanceOptionsComponent } from '../components';
 
 const MAP_PAGE_SIZE = 25;
 

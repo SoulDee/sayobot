@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Inject,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { downloadFile } from '@app/utils';
@@ -12,6 +18,7 @@ import { SETTING_KEY, SETTING_DEFAULT_SERVER } from '@app/core/config';
     selector: 'map-detail-container',
     templateUrl: './map-detail-container.component.html',
     styleUrls: ['./map-detail-container.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapDetailContainerComponent implements OnInit, OnDestroy {
     BASE_URL = 'https://txy1.sayobot.cn/beatmaps/download/';
@@ -99,7 +106,8 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
 
     private getServer() {
         return (
-            this.storage.getChild(SETTING_KEY, 'server') || SETTING_DEFAULT_SERVER
+            this.storage.getChild(SETTING_KEY, 'server') ||
+            SETTING_DEFAULT_SERVER
         );
     }
 }

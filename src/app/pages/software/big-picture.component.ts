@@ -1,4 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Inject,
+    OnInit,
+} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -10,6 +15,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
             </button>
         </div>
     `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BigPictureComponent implements OnInit {
     constructor(@Inject(MAT_DIALOG_DATA) public data: { url: string }) {}

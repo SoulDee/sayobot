@@ -15,11 +15,11 @@
     </div>
     <div class="item">
         <label class="label one-line">Artist</label>
-        <span class="content one-line">{{ detail.artist }}</span>
+        <span class="content one-line">{{ detail?.artist }}</span>
     </div>
     <div class="item">
         <label class="label one-line">Source</label>
-        <span class="content one-line">{{ detail.source }}</span>
+        <span class="content one-line">{{ detail?.source }}</span>
     </div>
 
     <div class="item">
@@ -51,6 +51,8 @@
 
     <div class="item">
         <label class="label one-line">Upload time</label>
-        <span class="content one-line">{{ getDate(detail?.last_update) }}</span>
+        <span class="content one-line">{{
+            detail?.last_update * 1000 | date: 'YYYY-MM-dd  hh:mm:ss'
+        }}</span>
     </div>
 </div>
