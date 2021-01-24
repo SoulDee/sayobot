@@ -1,7 +1,11 @@
 <div class="map-detail-wrapper" *ngIf="mapDetail">
     <div class="img-box">
         <mat-icon class="close-btn" matDialogClose>close</mat-icon>
-        <img [src]="imgUrl" alt="" />
+        <img
+            [src]="imgUrl"
+            [alt]="mapDetail?.title"
+            onerror="this.classList.add('error')"
+        />
         <map-detail-level
             [bidDataList]="mapDetail.bid_data"
             (switch)="detailInfo = $event"

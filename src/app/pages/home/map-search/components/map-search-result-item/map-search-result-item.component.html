@@ -1,6 +1,10 @@
 <div class="map-wrap" *ngIf="map">
     <div class="img-wrap">
-        <img [src]="imgSrc" [alt]="imgSrc" />
+        <img
+            [src]="imgSrc"
+            [alt]="map?.title"
+            onerror="this.classList.add('error')"
+        />
         <div
             class="overlay"
             matTooltip="{{ 'searchCtx.panel.lookTip' | translate }}"

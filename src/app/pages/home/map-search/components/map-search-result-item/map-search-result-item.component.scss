@@ -134,20 +134,9 @@ $padding-size: 1rem;
 
 img {
     position: relative;
-    width: 100%;
     display: block;
-    height: 100%;
-}
-
-img::after {
-    content: ' ';
-    height: 100%;
     width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: url($no-load-ng) no-repeat center;
-    background-size: contain;
+    height: 100%;
 }
 
 @media (max-width: 800px) {
