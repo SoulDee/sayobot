@@ -15,7 +15,6 @@ import { takeUntil } from 'rxjs/operators';
     selector: 'ads-box',
     templateUrl: './ads-box.component.html',
     styleUrls: ['./ads-box.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdsBoxComponent implements OnInit, OnDestroy {
     swiper: Swiper;
@@ -34,7 +33,6 @@ export class AdsBoxComponent implements OnInit, OnDestroy {
                 this.slides = res.data;
                 this.timer = setTimeout(() => {
                     this.initSwiper();
-                    this.cdr.markForCheck();
                 }, 0);
             });
     }
@@ -53,6 +51,7 @@ export class AdsBoxComponent implements OnInit, OnDestroy {
                 clickable: true,
             },
         });
+        this.cdr.markForCheck();
     }
 
     navTo(url: string) {

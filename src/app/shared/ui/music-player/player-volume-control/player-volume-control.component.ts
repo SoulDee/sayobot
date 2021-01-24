@@ -16,7 +16,7 @@ export class PlayerVolumeControlComponent {
         private player: MusicPlayerService,
         private storage: StorageService
     ) {
-        this.value = Number(storage.getChild<number>(PLAYER_KEY, 'volume'));
+        this.openVolume();
         this.setVolume();
     }
 
@@ -27,8 +27,8 @@ export class PlayerVolumeControlComponent {
     }
 
     openVolume() {
-        this.value =
-            this.storage.getChild<number>(PLAYER_KEY, 'prevVolume') || 50;
+        const volume = this.storage.getChild<number>(PLAYER_KEY, 'volume');
+        this.value = volume ? Number(volume) : 50;
         this.setVolume();
     }
 
