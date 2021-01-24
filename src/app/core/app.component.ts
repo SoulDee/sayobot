@@ -39,8 +39,11 @@ import { TranslateService } from '@ngx-translate/core';
                 right: 3rem;
                 bottom: 8rem;
             }
-        `
-    ]
+            mat-sidenav-container {
+                height: 100%;
+            }
+        `,
+    ],
 })
 export class AppComponent {
     constructor(public translate: TranslateService) {

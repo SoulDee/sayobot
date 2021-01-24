@@ -16,6 +16,7 @@ const Icon_Config: SvgIcon[] = [
     { name: 'search', url: '/search.svg' },
     { name: 'cloud-download', url: '/Download from the Cloud.svg' },
     { name: 'options', url: '/options.svg' },
+    { name: 'qr_code_scanner', url: '/qr_code_scanner.svg' },
 ];
 
 export const loadSvgIconResources = (ir: MatIconRegistry, ds: DomSanitizer) => {

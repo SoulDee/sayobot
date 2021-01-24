@@ -1,0 +1,76 @@
+.software-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 288px);
+    grid-gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 0;
+}
+
+.software-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        box-shadow: 0 10px 16px 0px #ccc;
+        transform: scale(1.03);
+    }
+
+    .icon {
+        $icon-size: 120px;
+        margin: 3rem 0 0;
+        overflow: hidden;
+        .mat-icon,
+        .picture-wrapper {
+            width: $icon-size;
+            height: $icon-size;
+            font-size: $icon-size;
+        }
+
+        .picture-wrapper {
+            cursor: pointer;
+        }
+    }
+
+    .title {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .des {
+        font-size: 12px;
+        color: #aaa;
+        height: 100px;
+    }
+
+    .download-btn {
+        position: relative;
+
+        .qrcode {
+            margin-left: 0.5rem;
+        }
+
+        &:hover {
+            img {
+                display: block;
+            }
+        }
+
+        img {
+            display: none;
+            position: absolute;
+            width: 224px;
+            height: 224px;
+            padding: 1rem;
+            max-width: 224px;
+            border: 1px solid #ccc;
+            background: #fff;
+            border-radius: 2px;
+            bottom: 0;
+            left: 100px;
+        }
+    }
+}

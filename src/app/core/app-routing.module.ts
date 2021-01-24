@@ -33,13 +33,22 @@ const appRoutes: Routes = [
                 (m) => m.SettingModule
             ),
     },
+    {
+        path: 'software',
+        loadChildren: () =>
+            import('../pages/software/software.module').then(
+                (m) => m.SoftwareModule
+            ),
+    },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
     declarations: [],
-    imports: [RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })],
+    imports: [
+        RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+    ],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}

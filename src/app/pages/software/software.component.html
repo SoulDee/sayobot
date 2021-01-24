@@ -1,0 +1,42 @@
+<div class="software-wrapper">
+    <ng-container *ngFor="let software of softwareList">
+        <mat-card class="software-card">
+            <div class="icon">
+                <ng-container *ngIf="software?.icon?.type === 'icon'">
+                    <div class="picture-wrapper">
+                        <img
+                            [src]="software?.icon?.name"
+                            [alt]="software?.des"
+                            [matTooltip]="'点击查看大图'"
+                            (click)="openBigPicture(software?.icon?.name)"
+                        />
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="software?.icon?.type === 'mat'">
+                    <mat-icon>{{ software?.icon?.name }}</mat-icon>
+                </ng-container>
+            </div>
+            <div class="title">{{ software?.title }}</div>
+            <div class="des">{{ software?.des }}</div>
+            <button
+                class="download-btn"
+                mat-raised-button
+                color="accent"
+                (click)="download(software?.download)"
+            >
+                {{ 'mapDetail.action.down' | translate }}
+
+                <ng-container *ngIf="software?.qrcode">
+                    <mat-icon class="qrcode" svgIcon="qr_code_scanner">
+                    </mat-icon>
+                </ng-container>
+
+                <img
+                    *ngIf="software?.qrcode"
+                    [src]="software?.qrcode"
+                    [alt]="software?.des"
+                />
+            </button>
+        </mat-card>
+    </ng-container>
+</div>
