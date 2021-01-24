@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import Swiper from 'swiper';
 import { Ad } from '@app/shared/models';
 import { AdsService } from '@app/core/service';
@@ -8,20 +8,16 @@ import { AdsService } from '@app/core/service';
     templateUrl: './ads-box.component.html',
     styleUrls: ['./ads-box.component.scss'],
 })
-export class AdsBoxComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdsBoxComponent implements OnInit, OnDestroy {
     swiper: Swiper;
     slides: Ad[];
-
     timer = null;
 
     constructor(private ads: AdsService) {}
 
-    ngAfterViewInit() {}
-
     ngOnInit() {
-        this.ads.getAds().subscribe((res: Ad[]) => {
-            this.slides = res;
-
+        this.ads.getAds().subscribe((res) => {
+            this.slides = res.data;
             this.timer = setTimeout(() => {
                 this.initSwiper();
             }, 0);

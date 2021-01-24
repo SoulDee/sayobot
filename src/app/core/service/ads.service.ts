@@ -1,20 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Ad } from '@app/shared/models';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { API_CONFIG } from '../providers/api';
+import { IResponse } from '@app/types';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class AdsService {
-    BASE_URL = 'https://api.sayobot.cn/';
+    constructor(
+        @Inject(API_CONFIG) private api: string,
+        private http: HttpClient
+    ) {}
 
-    constructor(private http: HttpClient) {}
-
-    getAds(): Observable<Ad[]> {
-        return this.http
-            .get(`${this.BASE_URL}static/ad`)
-            .pipe(map((res: { data: Ad[] }) => res.data));
+    getAds() {
+        return this.http.get<IResponse<Ad[]>>(`${this.api}/static/ad`);
     }
 }
