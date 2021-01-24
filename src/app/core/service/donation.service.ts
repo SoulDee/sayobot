@@ -10,8 +10,7 @@ import {
     SupportExpense,
     SupprtIncome,
 } from '@app/shared/models';
-
-const sum = (prev: number, current: number) => prev + current;
+import { sum } from '@app/utils';
 
 @Injectable({
     providedIn: 'root',

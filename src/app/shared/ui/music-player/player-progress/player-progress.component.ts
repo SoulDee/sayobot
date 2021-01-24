@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MusicPlayerService } from '../music-player.service';
 import { addZore } from '@app/utils';
 
@@ -8,11 +7,13 @@ import { addZore } from '@app/utils';
     templateUrl: './player-progress.component.html',
     styleUrls: ['./player-progress.component.scss'],
 })
-export class PlayerProgressComponent implements OnInit {
+export class PlayerProgressComponent implements OnInit, OnDestroy {
     disabled: boolean = false;
     max: number = 0;
     value: number = 0;
     time: string = '00:00';
+
+    timer: any;
 
     constructor(public player: MusicPlayerService) {}
 
@@ -28,19 +29,26 @@ export class PlayerProgressComponent implements OnInit {
             }
         });
 
-        fromEvent(this.player._player, 'canplay').subscribe(() => {
-            this.max = this.player._player.duration;
-            this.updateTime();
-            setInterval(() => {
-                if (this.player._player.readyState === 4) {
-                    this.updateTime();
-                }
-            }, 1000);
-        });
+        this.checkCanPlay();
+        this.timer = setInterval(() => {
+            this.checkCanPlay();
+        }, 1000);
+    }
+
+    ngOnDestroy() {
+        clearInterval(this.timer);
+        this.timer = null;
     }
 
     setCurrentTime() {
         this.player._player.currentTime = this.value;
+    }
+
+    private checkCanPlay() {
+        if (this.player._player.duration) {
+            this.max = this.player._player.duration;
+            this.updateTime();
+        }
     }
 
     private updateTime() {
