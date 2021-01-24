@@ -1,22 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Notice } from '@app/shared/models';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-
-const BASE_URL = 'https://api.sayobot.cn';
+import { API_CONFIG } from '../providers/api';
+import { IResponse } from '@app/types';
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class MessageService {
-    supportInfo: any;
-    notices: Notice[];
+    constructor(
+        @Inject(API_CONFIG) private api: string,
+        private http: HttpClient
+    ) {}
 
-    constructor(private http: HttpClient) {}
-
-    getNewList(): Observable<Notice[]> {
-        return this.http
-            .get(`${BASE_URL}/notice`)
-            .pipe(map((res: { data: Notice[] }) => res.data));
+    getNewList() {
+        return this.http.get<IResponse<Notice[]>>(`${this.api}/notice`);
     }
 }
