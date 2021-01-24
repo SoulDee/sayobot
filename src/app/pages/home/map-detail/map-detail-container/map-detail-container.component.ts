@@ -5,8 +5,9 @@ import { downloadFile } from '@app/utils';
 import { MapSidDetail, MapBidDetail } from '@app/shared/models';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MusicPlayerService } from '@app/shared/ui/music-player/music-player.service';
+import { StorageService } from '@app/core/service/storage.service';
+import { SETTING_KEY, SETTING_DEFAULT_SERVER } from '@app/core/config';
 
-// TODO 考虑将 level tags info 使用更好的写法来取消拆分
 @Component({
     selector: 'map-detail-container',
     templateUrl: './map-detail-container.component.html',
@@ -32,7 +33,8 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
         @Inject(MAT_DIALOG_DATA) public data: any,
         private player: MusicPlayerService,
         private snackBar: MatSnackBar,
-        private clipboard: Clipboard
+        private clipboard: Clipboard,
+        private storage: StorageService
     ) {}
 
     ngOnInit() {
@@ -47,9 +49,10 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
 
     // 点击下载事件
     onDownLoad(url: string) {
-        const server = localStorage.getItem('server');
         downloadFile(
-            `${this.BASE_URL}${url}/${this.mapDetail.sid}?server=${server}`
+            `${this.BASE_URL}${url}/${
+                this.mapDetail.sid
+            }?server=${this.getServer()}`
         );
 
         this.isMapDownload = true;
@@ -61,11 +64,10 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
 
     // 点击下载不带视频的事件
     onUnvedioDownload(url: string) {
-        const server = localStorage.getItem('server');
         downloadFile(
-            `${this.BASE_URL}${url}/${this.mapDetail.sid}?server=${
-                server || '0'
-            }`
+            `${this.BASE_URL}${url}/${
+                this.mapDetail.sid
+            }?server=${this.getServer()}`
         );
         this.isMapUnvedioDownload = true;
         this.mapUnvedioTimer = setTimeout(() => {
@@ -74,7 +76,6 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
         }, 15000);
     }
 
-    // 试听歌曲
     play() {
         const ins = {
             title: this.mapDetail.title,
@@ -85,7 +86,6 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
         this.player.add(ins);
     }
 
-    // 将当前铺面复制到剪切板
     shared() {
         const sharedInfo = `https://osu.sayobot.cn/?search=${this.mapDetail.sid}`;
         this.clipboard.copy(sharedInfo);
@@ -95,5 +95,11 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         clearTimeout(this.mapTimer);
         clearTimeout(this.musicTimer);
+    }
+
+    private getServer() {
+        return (
+            this.storage.getChild(SETTING_KEY, 'server') || SETTING_DEFAULT_SERVER
+        );
     }
 }
