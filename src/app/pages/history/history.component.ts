@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { UpdatedLogService, UpdateData } from '@app/core/service';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { UpdataInstance, UpdatedLogService } from '@app/core/service';
+import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-history',
     template: `
-        <div class="page" *ngIf="updateData">
+        <ng-container *ngIf="updateData$ | async as dataSource">
             <mat-list>
-                <ng-container *ngFor="let updata of updateData">
+                <ng-container *ngFor="let updata of dataSource">
                     <div mat-subheader>{{ updata.time }}</div>
                     <mat-list-item *ngFor="let item of updata.detail">
                         <div mat-line>{{ item }}</div>
@@ -15,17 +14,16 @@ import { ActivatedRoute } from '@angular/router';
                     <mat-divider></mat-divider>
                 </ng-container>
             </mat-list>
-        </div>
+        </ng-container>
     `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HistoryComponent implements OnInit {
-    updateData: UpdateData[];
+    updateData$: Observable<UpdataInstance[]>;
 
     constructor(private updated: UpdatedLogService) {}
 
     ngOnInit() {
-        this.updated.getUpdatedData().subscribe((res: UpdateData[]) => {
-            this.updateData = res;
-        });
+        this.updateData$ = this.updated.getUpdatedData();
     }
 }
