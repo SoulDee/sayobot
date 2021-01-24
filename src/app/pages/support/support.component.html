@@ -26,14 +26,14 @@
                 (change)="onSelectLink()"
             >
                 <mat-radio-button value="income_details"
-                    >收入 ( RMB: {{ currentIncome }} )</mat-radio-button
+                    >收入 ( RMB: {{ income }} )</mat-radio-button
                 >
                 <mat-radio-button value="expense_details"
-                    >支出 ( RMB: {{ currentExpense }} )</mat-radio-button
+                    >支出 ( RMB: {{ expense }} )</mat-radio-button
                 >
             </mat-radio-group>
 
-            <app-loading [loading]="loading"></app-loading>
+            <sayo-loading [loading]="loading"></sayo-loading>
             <table
                 mat-table
                 [dataSource]="dataSource"

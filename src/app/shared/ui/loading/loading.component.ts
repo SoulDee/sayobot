@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector: 'app-loading',
+    selector: 'sayo-loading',
     template: `
         <div *ngIf="loading" class="loading-wrap flex-center">
             <div
@@ -24,15 +24,11 @@ import { Component, OnInit, Input } from '@angular/core';
                 margin: 0 0.2rem;
                 animation: loading 500ms ease-in-out infinite;
             }
-        `
-    ]
+        `,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoadingComponent implements OnInit {
+export class LoadingComponent {
     @Input() loading: boolean;
-
     delayList = [0, 50, 100, 150, 200, 250];
-
-    constructor() {}
-
-    ngOnInit() {}
 }

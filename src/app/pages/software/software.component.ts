@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { downloadFile } from '@app/utils';
 import { BigPictureComponent } from './big-picture.component';
@@ -7,7 +7,7 @@ import { BigPictureComponent } from './big-picture.component';
     templateUrl: './software.component.html',
     styleUrls: ['./software.component.scss'],
 })
-export class SoftwareComponent implements OnInit {
+export class SoftwareComponent {
     softwareList = [
         {
             icon: {
@@ -51,8 +51,6 @@ export class SoftwareComponent implements OnInit {
     ];
 
     constructor(private dialog: MatDialog) {}
-
-    ngOnInit(): void {}
 
     download(url: string) {
         downloadFile(url);

@@ -2,14 +2,18 @@
     <section class="introduce">
         <div class="title">介绍</div>
         <div class="des">
-            小夜是一个基于酷Q、<a class="link" href="{{ config.kq }}"
-                target="_block">osu!api open
-                beta</a>
-            的QQ bot，主要编写语言是C++，辅以脚本语言Ruby、powershell、cmd（批处理），处理图片使用
-            <a class="link" href="{{ config.imageMagick }}"
-                target="_block">ImageMagick</a>，数据库目前还是用的目录树和文本文件
+            小夜是一个基于酷Q、<a
+                class="link"
+                href="{{ config.kq }}"
+                target="_block"
+                >osu!api open beta</a
+            >
+            的QQ
+            bot，主要编写语言是C++，辅以脚本语言Ruby、powershell、cmd（批处理），处理图片使用
+            <a class="link" href="{{ config.imageMagick }}" target="_block"
+                >ImageMagick</a
+            >，数据库目前还是用的目录树和文本文件
         </div>
-
     </section>
 
     <section class="ability">
@@ -23,25 +27,34 @@
     <section class="about-down">
         <div class="title">相关下载</div>
         <div class="content">
-            <div class="name">小夜のosu!下载器
-                <a mat-button href="{{ config.sayoDown }}" target="_black">Link
+            <div class="name">
+                小夜のosu!下载器
+                <a mat-button href="{{ config.sayoDown }}" target="_black"
+                    >Link
                 </a>
             </div>
-            <div class="des">点击谱面链接可以自动下图，mp神器，麻麻再也不用担心我的下图速度了！</div>
+            <div class="des">
+                点击谱面链接可以自动下图，mp神器，麻麻再也不用担心我的下图速度了！
+            </div>
         </div>
 
         <div class="content">
-            <div class="name">Ranked地图下载器
-                <a mat-button href="{{ config.sayoRankDown }}"
-                    target="_black">Link</a>
+            <div class="name">
+                Ranked地图下载器
+                <a mat-button href="{{ config.sayoRankDown }}" target="_black"
+                    >Link</a
+                >
             </div>
-            <div class="des">批量下载已经Ranked地图或者指定id的bp列表并存入收藏夹</div>
+            <div class="des">
+                批量下载已经Ranked地图或者指定id的bp列表并存入收藏夹
+            </div>
         </div>
     </section>
 
     <section class="buy">
         <div class="title">OSU 触盘</div>
-        <a href="{{ config.buySayo }}">这里</a>前往淘宝购买适合玩osu!的迷你键盘！
+        <a href="{{ config.buySayo }}">这里</a
+        >前往淘宝购买适合玩osu!的迷你键盘！
         <div class="imgs">
             <div class="pic" *ngFor="let picUrl of config.sayoShowPngs">
                 <img src="{{ picUrl }}" />
@@ -51,7 +64,10 @@
 
     <section class="contact">
         <div class="title">联系方式</div>
-        <div>首页开发者：<a class="link" href="https://github.com/SoulDee">SoulDee</a>
+        <div>
+            首页开发者：<a class="link" href="https://github.com/SoulDee"
+                >SoulDee</a
+            >
         </div>
         <div>Sayobot 交流群：{{ config.qqGroup }}</div>
         <div class="pic">

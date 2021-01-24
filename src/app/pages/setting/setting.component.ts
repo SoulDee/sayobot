@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { SETTING_KEY, SETTING_DEFAULT_SERVER } from '@app/core/config';
 import { ServerMangeService } from '@app/core/service';
 import { StorageService } from '@app/core/service/storage.service';
@@ -10,22 +10,20 @@ import { Observable } from 'rxjs';
     template: `
         <ng-container *ngIf="serveList$ | async as dataSourrce">
             <div class="page">
-                <div class="options">
-                    <mat-form-field>
-                        <mat-select
-                            placeholder="请选择服务器"
-                            [(value)]="serverCode"
-                            (selectionChange)="onServerSelect()"
+                <mat-form-field>
+                    <mat-select
+                        placeholder="请选择服务器"
+                        [(value)]="serverCode"
+                        (selectionChange)="onServerSelect()"
+                    >
+                        <mat-option
+                            *ngFor="let server of dataSourrce?.data"
+                            [value]="server.server"
                         >
-                            <mat-option
-                                *ngFor="let server of dataSourrce?.data"
-                                [value]="server.server"
-                            >
-                                {{ server.server_nameU }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
+                            {{ server.server_nameU }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </ng-container>
     `,
@@ -36,6 +34,7 @@ import { Observable } from 'rxjs';
             }
         `,
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingComponent implements OnInit {
     serveList$: Observable<IResponse<ServerItem[]>>;
