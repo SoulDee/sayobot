@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    api: 'https://api.sayobot.cn/?post',
+    api: 'https://api.sayobot.cn',
 };
