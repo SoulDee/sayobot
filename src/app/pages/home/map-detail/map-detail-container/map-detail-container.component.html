@@ -1,6 +1,6 @@
 <div class="map-detail-wrapper" *ngIf="mapDetail">
     <div class="img-box">
-        <mat-icon class="close-btn" matDialogClose>close</mat-icon>
+        <mat-icon class="close-btn" (click)="close()">close</mat-icon>
         <img
             [src]="imgUrl"
             [alt]="mapDetail?.title"

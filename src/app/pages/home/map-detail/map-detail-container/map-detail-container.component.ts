@@ -5,7 +5,7 @@ import {
     OnDestroy,
     ChangeDetectionStrategy,
 } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { downloadFile } from '@app/utils';
 import { MapSidDetail, MapBidDetail } from '@app/shared/models';
@@ -38,6 +38,7 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
+        private _dialog: MatDialogRef<MapDetailContainerComponent>,
         private player: MusicPlayerService,
         private snackBar: MatSnackBar,
         private clipboard: Clipboard,
@@ -48,6 +49,10 @@ export class MapDetailContainerComponent implements OnInit, OnDestroy {
         this.mapDetail = this.data.content;
         this.detailInfo = this.mapDetail.bid_data[0];
         this.imgUrl = `https://a.sayobot.cn/beatmaps/${this.mapDetail.sid}/covers/cover.webp?0`;
+    }
+
+    close() {
+        this._dialog.close();
     }
 
     get link() {
